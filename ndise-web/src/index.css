@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* CSS Variables for Theme Support */
+:root {
+  /* Default NDISE theme colors (light mode) */
+  --color-primary: #002868;
+  --color-primary-hover: #001f4d;
+  --color-secondary: #CC0000;
+  --color-accent: #FFD700;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-border: #e2e8f0;
+}
+
+/* Dark mode colors */
+.dark {
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-secondary: #ef4444;
+  --color-accent: #fbbf24;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-border: #334155;
+}
+
+/* Apply background color to body */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* Prevent transition on page load */
+.no-transition * {
+  transition: none !important;
+}
