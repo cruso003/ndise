@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { 
-  Shield, Users, AlertTriangle, Search, Network, 
-  TrendingUp, FileText, Activity, Brain, Eye
+import {
+  Shield, Users, AlertTriangle, Search, Network,
+  TrendingUp, FileText, Activity, Brain, Eye, X
 } from 'lucide-react';
 import { StatCard } from '../../components/ui';
 import { mapRelationships, analyzePatterns } from '../../lib/aiService';
 import { getAllAgencies } from '../../lib/agencyIntegration';
+import NetworkGraph from '../../components/NetworkGraph';
+import { investigationNetwork } from '../../utils/networkData';
 
 interface ActiveCase {
   id: string;
@@ -22,6 +24,7 @@ export default function PoliceDashboard() {
   const [activeCases, setActiveCases] = useState<ActiveCase[]>([]);
   const [aiPatterns, setAiPatterns] = useState<any[]>([]);
   const [agencyData, setAgencyData] = useState<any[]>([]);
+  const [showNetworkGraph, setShowNetworkGraph] = useState(false);
 
   useEffect(() => {
     // Load AI patterns
@@ -222,7 +225,10 @@ export default function PoliceDashboard() {
                       <button className="flex-1 text-xs bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700">
                         View Case Details
                       </button>
-                      <button className="flex-1 text-xs bg-purple-600 text-white px-3 py-2 rounded hover:bg-purple-700 flex items-center justify-center gap-1">
+                      <button
+                        onClick={() => setShowNetworkGraph(true)}
+                        className="flex-1 text-xs bg-purple-600 text-white px-3 py-2 rounded hover:bg-purple-700 flex items-center justify-center gap-1"
+                      >
                         <Network className="w-3 h-3" />
                         Network Analysis
                       </button>
@@ -273,7 +279,10 @@ export default function PoliceDashboard() {
               </div>
             </div>
             
-            <button className="w-full mt-4 bg-white text-purple-600 font-semibold py-2 rounded hover:bg-blue-50 transition-colors">
+            <button
+              onClick={() => setShowNetworkGraph(true)}
+              className="w-full mt-4 bg-white text-purple-600 font-semibold py-2 rounded hover:bg-blue-50 transition-colors"
+            >
               Try Demo Network Analysis
             </button>
           </div>
@@ -411,6 +420,63 @@ export default function PoliceDashboard() {
           </div>
         </div>
       </div>
+
+      {/* Network Graph Modal */}
+      {showNetworkGraph && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-7xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="p-6 border-b border-slate-200 flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900">Network Analysis</h2>
+                <p className="text-sm text-slate-600 mt-1">
+                  Interactive relationship mapping for Case #CASE-2025-11-234
+                </p>
+              </div>
+              <button
+                onClick={() => setShowNetworkGraph(false)}
+                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="p-6 flex-1 overflow-y-auto">
+              <NetworkGraph
+                data={investigationNetwork}
+                centralNodeId="central-1"
+                height={600}
+                onNodeClick={(node) => {
+                  console.log('Node clicked:', node);
+                }}
+              />
+              <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="flex items-start gap-3">
+                  <Brain className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <div>
+                    <h4 className="font-bold text-blue-900 mb-1">AI Insights</h4>
+                    <ul className="text-sm text-blue-800 space-y-1">
+                      <li>• Marcus Gaye has 10 direct connections with 3 high-risk individuals</li>
+                      <li>• Strong business ties to Emmanuel Dahn (Lagos) - 23 transactions in 6 months</li>
+                      <li>• Global Trade Ltd shows suspicious activity patterns</li>
+                      <li>• Frequent international travel coincides with financial transactions</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="p-6 border-t border-slate-200 flex items-center justify-end gap-3">
+              <button
+                onClick={() => setShowNetworkGraph(false)}
+                className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
+              >
+                Close
+              </button>
+              <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+                Generate Full Report
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
