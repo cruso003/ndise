@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { 
-  Shield, AlertTriangle, Activity, Map, Network, 
+import {
+  Shield, AlertTriangle, Activity, Map, Network,
   TrendingUp, Search, Brain, Clock
 } from 'lucide-react';
 import {
@@ -19,6 +19,7 @@ import {
 import type {
   IntegrationEvent
 } from '../../lib/agencyIntegration';
+import GeospatialMap, { type MapMarker, type HeatmapPoint } from '../../components/GeospatialMap';
 
 export default function OperationsCenter() {
   const [patterns, setPatterns] = useState<PatternDetection[]>([]);
@@ -126,13 +127,24 @@ export default function OperationsCenter() {
                     </button>
                     <button
                       className={`px-3 py-1 rounded text-sm font-medium ${
-                        selectedView === 'patterns' 
-                          ? 'bg-red-600 text-white' 
+                        selectedView === 'patterns'
+                          ? 'bg-red-600 text-white'
                           : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                       }`}
                       onClick={() => setSelectedView('patterns')}
                     >
                       AI Patterns
+                    </button>
+                    <button
+                      className={`px-3 py-1 rounded text-sm font-medium ${
+                        selectedView === 'map'
+                          ? 'bg-red-600 text-white'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
+                      onClick={() => setSelectedView('map')}
+                    >
+                      <Map className="w-4 h-4 inline mr-1" />
+                      Geospatial
                     </button>
                   </div>
                 </div>
@@ -269,7 +281,7 @@ export default function OperationsCenter() {
                             {pattern.confidence}% AI
                           </div>
                         </div>
-                        
+
                         <div className="grid grid-cols-2 gap-4 text-sm mb-3">
                           <div>
                             <span className="text-slate-500">Location:</span>
@@ -296,6 +308,130 @@ export default function OperationsCenter() {
                         </div>
                       </div>
                     ))}
+                  </div>
+                )}
+
+                {selectedView === 'map' && (
+                  <div>
+                    <GeospatialMap
+                      center={[6.315, -10.801]}
+                      zoom={10}
+                      height="600px"
+                      markers={[
+                        // Critical threat locations from patterns
+                        ...patterns
+                          .filter(p => p.severity === 'critical')
+                          .map((p, idx) => ({
+                            id: `pattern-${idx}`,
+                            position: [
+                              6.315 + (Math.random() - 0.5) * 0.2,
+                              -10.801 + (Math.random() - 0.5) * 0.2
+                            ] as [number, number],
+                            title: p.title,
+                            description: p.description,
+                            type: 'incident' as const,
+                            status: 'critical' as const,
+                            data: p
+                          })),
+                        // Anomaly locations
+                        ...anomalies
+                          .filter(a => a.severity === 'critical' || a.severity === 'high')
+                          .map((a, idx) => ({
+                            id: `anomaly-${idx}`,
+                            position: [
+                              6.315 + (Math.random() - 0.5) * 0.3,
+                              -10.801 + (Math.random() - 0.5) * 0.3
+                            ] as [number, number],
+                            title: a.personName,
+                            description: a.description,
+                            type: 'alert' as const,
+                            status: a.severity as 'critical' | 'warning',
+                            data: a
+                          })),
+                        // Key surveillance locations
+                        {
+                          id: 'ria-airport',
+                          position: [6.234, -10.362],
+                          title: 'Roberts International Airport',
+                          description: '4 cameras active, 2 alerts',
+                          type: 'airport',
+                          status: 'active'
+                        },
+                        {
+                          id: 'bo-waterside',
+                          position: [7.275, -11.032],
+                          title: 'Bo Waterside Border',
+                          description: '3 alerts detected',
+                          type: 'border',
+                          status: 'warning'
+                        },
+                        {
+                          id: 'ganta-border',
+                          position: [7.235, -8.983],
+                          title: 'Ganta Border Post',
+                          description: '5 alerts - suspicious activity',
+                          type: 'checkpoint',
+                          status: 'critical'
+                        },
+                        {
+                          id: 'freeport',
+                          position: [6.347, -10.788],
+                          title: 'Freeport of Monrovia',
+                          description: 'Port surveillance active',
+                          type: 'port',
+                          status: 'active'
+                        },
+                        {
+                          id: 'capitol',
+                          position: [6.314, -10.804],
+                          title: 'Capitol Building',
+                          description: 'Government perimeter secured',
+                          type: 'government',
+                          status: 'active'
+                        },
+                        // Active surveillance cameras
+                        {
+                          id: 'cam-redlight',
+                          position: [6.298, -10.747],
+                          title: 'Red Light Junction Camera',
+                          description: 'City surveillance - 4 alerts',
+                          type: 'camera',
+                          status: 'warning'
+                        },
+                        {
+                          id: 'cam-broadst',
+                          position: [6.301, -10.797],
+                          title: 'Broad Street Camera',
+                          description: 'Downtown monitoring',
+                          type: 'camera',
+                          status: 'active'
+                        }
+                      ]}
+                      heatmapPoints={[
+                        // High-crime density areas
+                        { position: [6.298, -10.747], intensity: 85 }, // Red Light
+                        { position: [6.324, -10.785], intensity: 92 }, // SKD Boulevard
+                        { position: [7.235, -8.983], intensity: 78 },  // Ganta Border
+                        { position: [6.301, -10.797], intensity: 65 }, // Broad Street
+                        { position: [6.302, -10.732], intensity: 58 }, // Duport Road
+                      ]}
+                      onMarkerClick={(marker) => {
+                        console.log('Marker clicked:', marker);
+                        // Could show a modal with detailed information
+                      }}
+                    />
+                    <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Brain className="w-5 h-5 text-blue-600" />
+                        <span className="font-semibold text-blue-900">Geospatial Intelligence Summary</span>
+                      </div>
+                      <div className="text-sm text-blue-800 space-y-1">
+                        <p>• {patterns.filter(p => p.severity === 'critical').length} critical threat zones identified</p>
+                        <p>• {anomalies.length} anomaly hotspots mapped</p>
+                        <p>• Real-time surveillance across 24 nationwide cameras</p>
+                        <p>• AI heat mapping shows highest activity in Red Light Junction and SKD Boulevard</p>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -424,7 +560,14 @@ export default function OperationsCenter() {
                 <h3 className="text-lg font-bold text-slate-900">Quick Actions</h3>
               </div>
               <div className="p-6 space-y-2">
-                <button className="w-full flex items-center gap-3 px-4 py-3 bg-slate-50 hover:bg-slate-100 rounded-lg text-left transition-colors">
+                <button
+                  onClick={() => setSelectedView('map')}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
+                    selectedView === 'map'
+                      ? 'bg-blue-100 border-2 border-blue-500'
+                      : 'bg-slate-50 hover:bg-slate-100'
+                  }`}
+                >
                   <Map className="w-5 h-5 text-blue-600" />
                   <div>
                     <div className="font-medium text-slate-900">Geospatial Map</div>
