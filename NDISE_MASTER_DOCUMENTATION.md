@@ -662,12 +662,18 @@ https://ndise.gov.lr (example)
 
 ## Demo Credentials
 
+**⚠️ All demo accounts use the same password: `demo2024`**
+
+---
+
 ### 🛂 Border Control Officer
 
 ```
-Email: border.officer@ndise.gov.lr
-Password: BorderSecure2024
+Username: border.officer
+Password: demo2024
+Full Name: Officer Mary Toe
 Dashboard: /border
+Role: Border Control - Roberts Airport
 ```
 
 **Test Scenarios**:
@@ -681,9 +687,11 @@ Dashboard: /border
 ### 👮 Police Officer
 
 ```
-Email: police.officer@ndise.gov.lr
-Password: PoliceSecure2024
+Username: police.officer
+Password: demo2024
+Full Name: Detective Grace Kollie
 Dashboard: /police
+Role: Police - Criminal Investigation
 ```
 
 **Test Scenarios**:
@@ -697,9 +705,11 @@ Dashboard: /police
 ### 🕵️ NSA Intelligence Analyst
 
 ```
-Email: nsa.analyst@ndise.gov.lr
-Password: NSASecure2024
+Username: nsa.analyst
+Password: demo2024
+Full Name: Agent Sarah Mensah
 Dashboard: /nsa
+Role: NSA - Intelligence Division
 Clearance: Top Secret
 ```
 
@@ -714,9 +724,11 @@ Clearance: Top Secret
 ### 🏛️ Executive Administrator
 
 ```
-Email: executive.admin@ndise.gov.lr
-Password: ExecutiveSecure2024
+Username: exec.admin
+Password: demo2024
+Full Name: Hon. James Karnley
 Dashboard: /executive
+Role: Executive - Ministry of Justice
 ```
 
 **Test Scenarios**:
@@ -730,9 +742,11 @@ Dashboard: /executive
 ### 📝 Enrollment Officer
 
 ```
-Email: enrollment.officer@ndise.gov.lr
-Password: EnrollSecure2024
+Username: enroll.officer
+Password: demo2024
+Full Name: Officer Thomas Kpan
 Dashboard: /enrollment
+Role: Enrollment - Civil Registry Paynesville
 ```
 
 **Test Scenarios**:
@@ -743,19 +757,38 @@ Dashboard: /enrollment
 
 ---
 
-### 🏢 Agency API Access (Ecobank Example)
+### 🏢 Agency Partner (Ecobank Example)
 
 ```
-Organization: Ecobank Liberia
-API Key: ndise_live_ecobank_8829_a1b2c3d4
-Endpoint: /agency
+Username: agency.partner
+Password: demo2024
+Full Name: Janet Williams
+Dashboard: /agency
+Organization: Ecobank Liberia - KYC Department
 ```
 
 **Test Scenarios**:
 1. View API usage dashboard
 2. Check monthly statistics
 3. Download usage reports
-4. Manage API keys
+4. Test identity verification API
+
+---
+
+### 🔧 System Administrator
+
+```
+Username: sys.admin
+Password: demo2024
+Full Name: Administrator
+Dashboard: All dashboards (full access)
+Role: Admin - NSA IT Department
+```
+
+**Full System Access**:
+- User management
+- System configuration
+- All dashboards and reports
 
 ---
 
