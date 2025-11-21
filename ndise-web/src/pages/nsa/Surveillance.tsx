@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   Camera, AlertTriangle, MapPin, Activity, Maximize2, Play, Pause, Film,
   Radio, Satellite, Car, Users, Eye, Zap, Target, Navigation, Shield,
   Clock, TrendingUp, UserCheck, Crosshair, Wifi, AlertCircle
 } from 'lucide-react';
+import CCTVSurveillance from '../../components/CCTVSurveillance';
 
 interface CameraFeed {
   id: string;
@@ -54,11 +56,20 @@ interface Alert {
 }
 
 export default function Surveillance() {
+  const [searchParams] = useSearchParams();
   const [selectedFeed, setSelectedFeed] = useState<string>('CAM-001');
   const [isLive, setIsLive] = useState(true);
   const [activeTab, setActiveTab] = useState<'all' | 'airport' | 'border' | 'city' | 'port' | 'government' | 'highway' | 'aerial'>('all');
   const [showTracking, setShowTracking] = useState(true);
   const [autoRotate, setAutoRotate] = useState(false);
+
+  // Check if we have a target person for enhanced surveillance
+  const targetId = searchParams.get('targetId');
+  const targetName = searchParams.get('targetName');
+  const targetPerson = targetId && targetName ? {
+    nationalId: targetId,
+    name: targetName,
+  } : undefined;
 
   // Generate 24 comprehensive camera feeds
   const feeds: CameraFeed[] = [
@@ -283,6 +294,19 @@ export default function Surveillance() {
       case 'crowd_anomaly': return <Users className="w-4 h-4" />;
     }
   };
+
+  // If we have a target person, show enhanced CCTV surveillance
+  if (targetPerson) {
+    return (
+      <CCTVSurveillance
+        targetPerson={targetPerson}
+        onDetection={(detection) => {
+          console.log('Target detected:', detection);
+          // TODO: Trigger alerts, notifications, etc.
+        }}
+      />
+    );
+  }
 
   return (
     <div className="space-y-6 bg-slate-950 min-h-screen p-6 -m-6">
