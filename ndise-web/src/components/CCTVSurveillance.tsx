@@ -29,6 +29,7 @@ import {
   Bell,
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
+import { createCCTVDetectionAlert } from '../services/alertService';
 
 interface CCTVCamera {
   id: string;
@@ -232,6 +233,15 @@ export default function CCTVSurveillance({ targetPerson, onDetection }: CCTVSurv
 
     setDetections(prev => [newDetection, ...prev]);
     setActiveTracking(prev => prev ? { ...prev, lastSeen: newDetection } : null);
+
+    // Create NDISE alert for this detection
+    createCCTVDetectionAlert({
+      nationalId: targetPerson.nationalId,
+      personName: targetPerson.name,
+      cameraId: randomCamera.id,
+      location: randomCamera.location,
+      confidence: Math.round(newDetection.confidence),
+    });
 
     if (onDetection) {
       onDetection(newDetection);
