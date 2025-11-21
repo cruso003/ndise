@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Search, User, Shield, AlertTriangle, CheckCircle, XCircle, Clock,
   FileText, MapPin, Calendar, Phone, Mail, Fingerprint, Camera, Globe,
-  TrendingUp, History, Eye, Download, Flag, Award, Ban
+  TrendingUp, History, Eye, Download, Flag, Award, Ban, ExternalLink
 } from 'lucide-react';
 
 interface SearchResult {
@@ -48,6 +49,7 @@ interface SearchResult {
 }
 
 export default function BorderSearch() {
+  const navigate = useNavigate();
   const [searchType, setSearchType] = useState<'passport' | 'national_id' | 'name' | 'biometric'>('passport');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
@@ -493,11 +495,11 @@ export default function BorderSearch() {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          setSelectedPerson(person);
-                          setShowDetailModal(true);
+                          navigate(`/id/${person.nationalID || person.id}`);
                         }}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                        className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
                       >
+                        <ExternalLink className="w-4 h-4" />
                         View Full Profile
                       </button>
                       <button className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-sm font-medium">
@@ -703,25 +705,34 @@ export default function BorderSearch() {
               )}
             </div>
 
-            <div className="sticky bottom-0 bg-slate-50 border-t border-slate-200 px-6 py-4 flex items-center justify-end gap-3">
+            <div className="sticky bottom-0 bg-slate-50 border-t border-slate-200 px-6 py-4 flex items-center justify-between gap-3">
               <button
-                onClick={() => setShowDetailModal(false)}
-                className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-white transition-colors"
+                onClick={() => navigate(`/id/${selectedPerson.nationalID || selectedPerson.id}`)}
+                className="flex items-center gap-2 px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors"
               >
-                Close
+                <ExternalLink className="w-4 h-4" />
+                Open Full Profile Page
               </button>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                Print Report
-              </button>
-              {selectedPerson.status === 'watchlist' || selectedPerson.status === 'flagged' ? (
-                <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
-                  Detain & Notify NSA
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setShowDetailModal(false)}
+                  className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-white transition-colors"
+                >
+                  Close
                 </button>
-              ) : (
-                <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                  Approve Entry
+                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                  Print Report
                 </button>
-              )}
+                {selectedPerson.status === 'watchlist' || selectedPerson.status === 'flagged' ? (
+                  <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                    Detain & Notify NSA
+                  </button>
+                ) : (
+                  <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                    Approve Entry
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

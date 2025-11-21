@@ -64,6 +64,8 @@ import RoleManagement from './pages/admin/Roles';
 import AdminAuditLogs from './pages/admin/AuditLogs';
 import SystemConfig from './pages/admin/SystemConfig';
 
+// Consolidated pages
+import ConsolidatedIDPage from './pages/ConsolidatedIDPage';
 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
@@ -112,7 +114,13 @@ function App() {
               {/* Protected Routes */}
               <Route element={<ProtectedRoute />}>
                 <Route element={<Layout />}>
-                  
+
+                  {/* Consolidated National ID Page - Accessible to all authenticated users */}
+                  <Route
+                    path="/id/:nationalId"
+                    element={<ConsolidatedIDPage />}
+                  />
+
                   {/* NSA Operations Center (PRIMARY) */}
                   <Route path="/nsa">
                     <Route index element={<Navigate to="/nsa/operations-center" replace />} />
