@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   FileText, Search, Filter, Plus, CheckCircle, XCircle, Clock, AlertTriangle,
-  Calendar, User, MapPin, Download, Upload, Eye, Edit2, RefreshCw, Ban, TrendingUp
+  Calendar, User, Download, Upload, Eye, Edit2, RefreshCw, Ban
 } from 'lucide-react';
 
 interface VisaApplication {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search as SearchIcon, User, AlertTriangle, ExternalLink, Shield, FileText, Download, CheckCircle, XCircle } from 'lucide-react';
+import { Search as SearchIcon, User, AlertTriangle, ExternalLink, Shield, FileText, Download, CheckCircle } from 'lucide-react';
 import ConsolidatedProfileView from '../../components/ConsolidatedProfileView';
 import { consolidatePersonData } from '../../lib/apiIntegration';
 import { addToWatchlist } from '../../services/watchlistService';
@@ -28,7 +28,11 @@ export default function Search() {
       await new Promise(resolve => setTimeout(resolve, 500));
 
       // For demo, use consolidatePersonData with a known ID
-      const result = await consolidatePersonData('1990010112345678');
+      const result = await consolidatePersonData({ 
+        nationalID: '1990010112345678',
+        name: 'Demo User',
+        dob: '1990-01-01'
+      });
       setSelectedPerson(result);
     } catch (error) {
       console.error('Search error:', error);
@@ -55,7 +59,7 @@ export default function Search() {
         addedByUser: 'Officer Marcus Johnson',
         actions: [
           {
-            type: 'alert',
+            type: 'notify_agency',
             description: 'Person added to national wanted list - Arrest on sight',
             agencies: ['police', 'border', 'nsa'],
           },
@@ -272,7 +276,13 @@ export default function Search() {
               </button>
             </div>
           </div>
-          <ConsolidatedProfileView person={selectedPerson} onClose={() => setSelectedPerson(null)} />
+          <button 
+            onClick={() => setSelectedPerson(null)}
+            className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2"
+          >
+            ← Back to Search
+          </button>
+          <ConsolidatedProfileView profile={selectedPerson} />
         </div>
       ) : searchQuery && !isSearching && (
         <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-12 text-center">

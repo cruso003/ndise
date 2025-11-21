@@ -67,28 +67,28 @@ export default function EnrollmentDashboard() {
           value={stats.todayEnrollments.toString()}
           subtitle="New registrations"
           icon={Users}
-          color="blue"
+          variant="info"
         />
         <StatCard
           title="Pending Approvals"
           value={stats.pendingApprovals.toString()}
           subtitle="Awaiting review"
           icon={Clock}
-          color="orange"
+          variant="warning"
         />
         <StatCard
           title="Avg Processing Time"
           value={stats.avgProcessingTime}
           subtitle="Per enrollment"
           icon={TrendingUp}
-          color="green"
+          variant="success"
         />
         <StatCard
           title="Completion Rate"
           value={stats.completionRate}
           subtitle="Quality score"
           icon={CheckCircle}
-          color="purple"
+          variant="default"
         />
       </div>
 

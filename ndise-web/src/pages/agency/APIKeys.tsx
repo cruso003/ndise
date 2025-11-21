@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Key, Copy, RefreshCw, Trash2, Plus, Eye, EyeOff, Shield } from 'lucide-react';
+import { Key, Copy, RefreshCw, Trash2, Shield } from 'lucide-react';
 
 interface APIKey {
   id: string;
@@ -12,7 +12,7 @@ interface APIKey {
 }
 
 export default function APIKeys() {
-  const [keys, setKeys] = useState<APIKey[]>([
+  const [keys] = useState<APIKey[]>([
     {
       id: '1',
       name: 'Production Primary',
@@ -33,7 +33,7 @@ export default function APIKeys() {
     }
   ]);
 
-  const [showKeyModal, setShowKeyModal] = useState(false);
+  // const [showKeyModal, setShowKeyModal] = useState(false);
 
   return (
     <div className="space-y-6">
@@ -42,13 +42,13 @@ export default function APIKeys() {
           <h1 className="text-3xl font-bold text-slate-900">API Keys</h1>
           <p className="text-slate-600 mt-1">Manage your API authentication credentials</p>
         </div>
-        <button 
+        {/* <button 
           onClick={() => setShowKeyModal(true)}
           className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 font-medium hover:bg-blue-700"
         >
           <Plus className="w-4 h-4" />
           Generate New Key
-        </button>
+        </button> */}
       </div>
 
       <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">

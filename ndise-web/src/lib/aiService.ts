@@ -12,7 +12,7 @@
  * 8. Risk Scoring (Automated assessment)
  */
 
-import { ConsolidatedProfile } from './apiIntegration';
+
 
 // ============================================
 // 1. DUPLICATE DETECTION
@@ -34,8 +34,8 @@ export interface DuplicateDetectionResult {
 }
 
 export function detectDuplicates(
-  fingerprints: string[],
-  facePhoto: string,
+  _fingerprints: string[],
+  _facePhoto: string,
   demographicData: {
     name: string;
     dob: string;
@@ -78,7 +78,7 @@ export function detectDuplicates(
   };
 }
 
-function calculateDemographicSimilarity(data: any): number {
+function calculateDemographicSimilarity(_data: any): number {
   // Simplified fuzzy matching
   return Math.random() * 50 + 30; // 30-80
 }
@@ -106,7 +106,7 @@ export interface PatternDetection {
   actionItems: string[];
 }
 
-export function analyzePatterns(timeframe: 'day' | 'week' | 'month' = 'day'): PatternDetection[] {
+export function analyzePatterns(_timeframe: 'day' | 'week' | 'month' = 'day'): PatternDetection[] {
   // This would normally query the database and run ML models
   // For now, return mock patterns from data file
   return [
@@ -212,8 +212,8 @@ export interface NetworkMap {
 
 export function mapRelationships(
   personId: string,
-  depth: number = 2,
-  includeTypes: string[] = ['all']
+  _depth: number = 2,
+  _includeTypes: string[] = ['all']
 ): NetworkMap {
   // Mock network - in production, this would query graph database
   return {
@@ -284,7 +284,7 @@ export interface PredictionResult {
   timeframe?: string;
 }
 
-export function predictOverstayRisk(foreignerId: string): PredictionResult {
+export function predictOverstayRisk(_foreignerId: string): PredictionResult {
   // Simulate ML model prediction
   const riskScore = Math.random() * 100;
   
@@ -303,7 +303,7 @@ export function predictOverstayRisk(foreignerId: string): PredictionResult {
   };
 }
 
-export function forecastEnrollmentDemand(location: string, days: number = 30): PredictionResult {
+export function forecastEnrollmentDemand(_location: string, days: number = 30): PredictionResult {
   const dailyAvg = 150 + Math.random() * 50;
   
   return {
@@ -338,7 +338,7 @@ export interface AnomalyAlert {
   detectedAt: string;
 }
 
-export function detectAnomalies(personId?: string): AnomalyAlert[] {
+export function detectAnomalies(_personId?: string): AnomalyAlert[] {
   // In production, this would run continuously and store alerts
   return [
     {

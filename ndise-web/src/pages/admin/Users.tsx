@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Users, Search, Plus, Edit2, Trash2, Shield } from 'lucide-react';
+import { Search, Plus, Edit2, Trash2, Shield } from 'lucide-react';
 import { mockUsers } from '../../data/users';
 
 export default function UserManagement() {
-  const [users, setUsers] = useState(mockUsers);
+  const [users] = useState(mockUsers);
 
   return (
     <div className="space-y-6">

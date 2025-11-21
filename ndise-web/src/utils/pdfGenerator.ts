@@ -243,7 +243,7 @@ export function generateBorderControlReport(person: PersonDetails): void {
     doc.setFontSize(9);
     doc.setTextColor(0);
 
-    person.travelHistory.slice(0, 5).forEach((travel, index) => {
+    person.travelHistory.slice(0, 5).forEach((travel) => {
       doc.setFont('helvetica', 'bold');
       doc.text(`${travel.date}`, leftCol, yPosition);
       doc.setFont('helvetica', 'normal');

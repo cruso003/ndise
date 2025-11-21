@@ -13,8 +13,6 @@ import {
   FileCheck,
   Briefcase,
   Ticket,
-  Key,
-  BookOpen,
   Bell,
   ChevronDown,
   Menu,

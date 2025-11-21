@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Plane, Ship, Users, AlertTriangle, CheckCircle, Clock,
   Search, Filter, MapPin, Fingerprint, Shield, Eye, XCircle,

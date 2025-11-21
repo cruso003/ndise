@@ -3,7 +3,6 @@ import {
   Printer,
   CreditCard,
   CheckCircle,
-  AlertCircle,
   Clock,
   XCircle,
   Play,
@@ -11,8 +10,6 @@ import {
   RotateCcw,
   Eye,
   Filter,
-  Package,
-  TrendingUp,
   AlertTriangle,
 } from 'lucide-react';
 

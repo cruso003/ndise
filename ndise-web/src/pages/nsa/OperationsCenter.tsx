@@ -19,7 +19,7 @@ import {
 import type {
   IntegrationEvent
 } from '../../lib/agencyIntegration';
-import GeospatialMap, { type MapMarker, type HeatmapPoint } from '../../components/GeospatialMap';
+import GeospatialMap from '../../components/GeospatialMap';
 
 export default function OperationsCenter() {
   const [patterns, setPatterns] = useState<PatternDetection[]>([]);

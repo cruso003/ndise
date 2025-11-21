@@ -201,7 +201,7 @@ export function addToWatchlist(entry: Omit<WatchlistEntry, 'id' | 'addedAt' | 's
  * Remove a person from the watchlist
  */
 export function removeFromWatchlist(entryId: string, removedBy: string, reason: string): boolean {
-  for (const [nationalId, entries] of watchlistDatabase.entries()) {
+  for (const [_, entries] of watchlistDatabase.entries()) {
     const entry = entries.find(e => e.id === entryId);
     if (entry && entry.status === 'active') {
       entry.status = 'resolved';

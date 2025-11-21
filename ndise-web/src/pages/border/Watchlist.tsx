@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import {
   Shield, AlertTriangle, Search, Filter, Plus, Edit2, Trash2, Eye,
-  Clock, MapPin, FileText, CheckCircle, XCircle, User, Calendar,
-  TrendingUp, Activity, Target, Bell, Download, Upload
+  Clock, MapPin, CheckCircle, XCircle, User,
+  Target, Bell, Download, Upload
 } from 'lucide-react';
 
 interface WatchlistEntry {
@@ -36,7 +36,7 @@ export default function WatchlistManagement() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('active');
   const [selectedEntry, setSelectedEntry] = useState<WatchlistEntry | null>(null);
-  const [showAddModal, setShowAddModal] = useState(false);
+  // const [showAddModal, setShowAddModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
 
   // Generate sample watchlist data
@@ -274,7 +274,7 @@ export default function WatchlistManagement() {
             Import
           </button>
           <button
-            onClick={() => setShowAddModal(true)}
+            onClick={() => {/* setShowAddModal(true) */}}
             className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
           >
             <Plus className="w-4 h-4" />

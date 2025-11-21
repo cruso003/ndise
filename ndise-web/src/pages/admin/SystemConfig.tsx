@@ -1,4 +1,4 @@
-import { Save, RefreshCw, Database, Lock, Globe, Bell } from 'lucide-react';
+import { Save, Database, Lock, Globe, Bell } from 'lucide-react';
 
 export default function SystemConfig() {
   return (

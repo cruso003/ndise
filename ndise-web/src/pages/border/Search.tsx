@@ -6,7 +6,7 @@ import {
   TrendingUp, History, Eye, Download, Flag, Award, Ban, ExternalLink
 } from 'lucide-react';
 import { addToWatchlist } from '../../services/watchlistService';
-import { createBorderCrossingAlert, createAlert } from '../../services/alertService';
+import { createBorderCrossingAlert } from '../../services/alertService';
 import { useToast } from '../../context/ToastContext';
 import { generateBorderControlReport } from '../../utils/pdfGenerator';
 

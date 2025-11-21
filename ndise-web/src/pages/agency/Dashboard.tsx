@@ -89,21 +89,21 @@ export default function AgencyDashboard() {
           value={currentStats.requests.toLocaleString()}
           subtitle="Total verifications"
           icon={Activity}
-          color="blue"
+          variant="info"
         />
         <StatCard
           title="Success Rate"
           value={`${successRate}%`}
           subtitle={`${currentStats.successful.toLocaleString()} successful`}
           icon={CheckCircle}
-          color="green"
+          variant="success"
         />
         <StatCard
           title="Avg Response Time"
           value={`${currentStats.avgResponse}ms`}
           subtitle="API latency"
           icon={TrendingUp}
-          color="purple"
+          variant="default"
         />
       </div>
 

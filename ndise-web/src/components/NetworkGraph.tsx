@@ -54,7 +54,7 @@ export default function NetworkGraph({
   height = 600,
   width,
 }: NetworkGraphProps) {
-  const graphRef = useRef<any>();
+  const graphRef = useRef<any>(null);
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [selectedLink, setSelectedLink] = useState<GraphLink | null>(null);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);

@@ -425,10 +425,15 @@ export default function GeospatialMap({
                 <div
                   className="w-3 h-3 rounded-full border border-white shadow-sm"
                   style={{
-                    background: createCustomIcon(type as any).options.html?.includes('#ef4444') ? '#ef4444' :
-                               createCustomIcon(type as any).options.html?.includes('#f59e0b') ? '#f59e0b' :
-                               createCustomIcon(type as any).options.html?.includes('#10b981') ? '#10b981' :
-                               '#3b82f6'
+                    background: (() => {
+                      const iconHtml = createCustomIcon(type as any).options.html;
+                      if (typeof iconHtml === 'string') {
+                        if (iconHtml.includes('#ef4444')) return '#ef4444';
+                        if (iconHtml.includes('#f59e0b')) return '#f59e0b';
+                        if (iconHtml.includes('#10b981')) return '#10b981';
+                      }
+                      return '#3b82f6';
+                    })()
                   }}
                 />
                 <span className="text-slate-600 capitalize">{type}</span>

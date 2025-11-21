@@ -210,28 +210,28 @@ export default function AdminDashboard() {
           value={users.length.toString()}
           subtitle={`${users.filter(u => u.status === 'active').length} active`}
           icon={Users}
-          color="blue"
+          variant="info"
         />
         <StatCard
           title="Roles Defined"
           value={roles.length.toString()}
           subtitle="System-wide"
           icon={Shield}
-          color="purple"
+          variant="default"
         />
         <StatCard
           title="Active Sessions"
           value="45"
           subtitle="Currently logged in"
           icon={Activity}
-          color="green"
+          variant="success"
         />
         <StatCard
           title="System Health"
           value="98%"
           subtitle="All services operational"
           icon={Settings}
-          color="orange"
+          variant="warning"
         />
       </div>
 

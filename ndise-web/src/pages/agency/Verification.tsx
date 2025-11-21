@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, CheckCircle, XCircle, AlertTriangle, User, Shield, Download, Clock, Phone, MapPin } from 'lucide-react';
+import { Search, CheckCircle, XCircle, AlertTriangle, Shield, Download, Clock, Phone, MapPin } from 'lucide-react';
 
 export default function Verification() {
   const [nationalId, setNationalId] = useState('');

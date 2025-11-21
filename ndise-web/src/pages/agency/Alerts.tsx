@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Bell, AlertTriangle, Shield, TrendingUp, CheckCircle, XCircle, Info } from 'lucide-react';
+import { Bell, AlertTriangle, Shield, TrendingUp, CheckCircle, Info } from 'lucide-react';
 
 export default function Alerts() {
   const [filterSeverity, setFilterSeverity] = useState<'all' | 'critical' | 'high' | 'medium' | 'info'>('all');

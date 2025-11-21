@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Clock, CheckCircle, XCircle, AlertTriangle, Download, Search, Filter } from 'lucide-react';
+import { Clock, CheckCircle, XCircle, AlertTriangle, Download, Search } from 'lucide-react';
 
 export default function History() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<'all' | 'success' | 'failed' | 'high-risk'>('all');
-  const [timeRange, setTimeRange] = useState<'today' | 'week' | 'month'>('today');
+  // const [timeRange, setTimeRange] = useState<'today' | 'week' | 'month'>('today');
 
   // Sample verification history
   const verificationHistory = [

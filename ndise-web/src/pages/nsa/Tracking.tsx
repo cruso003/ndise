@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Target, MapPin, Navigation, Radio, Search, AlertTriangle, User } from 'lucide-react';
+import { Target, MapPin, Navigation, Radio, Search, User, Activity } from 'lucide-react';
 
 interface Target {
   id: string;

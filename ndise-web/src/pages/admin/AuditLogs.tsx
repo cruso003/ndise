@@ -1,4 +1,4 @@
-import { Shield, Search, Filter, Download, AlertTriangle } from 'lucide-react';
+import { Search, Filter, Download, AlertTriangle } from 'lucide-react';
 
 export default function AdminAuditLogs() {
   return (

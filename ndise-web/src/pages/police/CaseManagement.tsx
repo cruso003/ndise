@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Briefcase, Search, Filter, Plus, FileText, User, Calendar, Clock } from 'lucide-react';
+import { Search, Filter, Plus, User } from 'lucide-react';
 
 interface Case {
   id: string;
@@ -12,7 +12,7 @@ interface Case {
 }
 
 export default function CaseManagement() {
-  const [cases, setCases] = useState<Case[]>([
+  const [cases] = useState<Case[]>([
     {
       id: 'CASE-2024-8821',
       title: 'Armed Robbery at Sinkor 12th St',

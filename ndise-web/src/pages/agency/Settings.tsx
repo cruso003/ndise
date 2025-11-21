@@ -1,4 +1,4 @@
-import { Bell, Shield, Globe, Mail } from 'lucide-react';
+import { Bell, Shield } from 'lucide-react';
 
 export default function Settings() {
   return (

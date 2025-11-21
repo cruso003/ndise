@@ -1,4 +1,4 @@
-import { BookOpen, Code, Terminal, FileText, ChevronRight } from 'lucide-react';
+import { Code, Terminal, ChevronRight } from 'lucide-react';
 
 export default function Documentation() {
   return (

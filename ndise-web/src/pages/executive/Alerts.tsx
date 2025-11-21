@@ -1,4 +1,4 @@
-import { AlertTriangle, Bell, CheckCircle, Info } from 'lucide-react';
+import { AlertTriangle, Info } from 'lucide-react';
 
 export default function Alerts() {
   return (

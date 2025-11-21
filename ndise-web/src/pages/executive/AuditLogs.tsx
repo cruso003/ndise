@@ -1,4 +1,4 @@
-import { Shield, Search, Filter, Download } from 'lucide-react';
+import { Search, Filter, Download } from 'lucide-react';
 
 export default function AuditLogs() {
   return (

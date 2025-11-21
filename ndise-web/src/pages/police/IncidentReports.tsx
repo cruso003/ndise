@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ClipboardList, Search, Filter, Plus, MapPin, Clock, AlertTriangle } from 'lucide-react';
+import { Plus, MapPin, Clock, AlertTriangle } from 'lucide-react';
 
 interface Incident {
   id: string;
@@ -13,7 +13,7 @@ interface Incident {
 }
 
 export default function IncidentReports() {
-  const [incidents, setIncidents] = useState<Incident[]>([
+  const [incidents] = useState<Incident[]>([
     {
       id: 'INC-2024-5501',
       type: 'Public Disturbance',

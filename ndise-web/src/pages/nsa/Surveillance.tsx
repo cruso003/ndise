@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import {
   Camera, AlertTriangle, MapPin, Activity, Maximize2, Play, Pause, Film,
   Radio, Satellite, Car, Users, Eye, Zap, Target, Navigation, Shield,
-  Clock, TrendingUp, UserCheck, Crosshair, Wifi, AlertCircle
+  Clock, UserCheck, Crosshair, Wifi
 } from 'lucide-react';
 import CCTVSurveillance from '../../components/CCTVSurveillance';
 

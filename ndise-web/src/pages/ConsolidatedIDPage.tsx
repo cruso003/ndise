@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
-  User, Shield, AlertTriangle, MapPin, Phone, CreditCard, Camera,
-  Fingerprint, Clock, TrendingUp, Flag, Bell, Lock, Unlock,
-  Eye, FileText, Network, Play, Ban, CheckCircle, XCircle,
-  Activity, Globe, Briefcase, Users, Search, Download, Share2
+  User, Shield, AlertTriangle, Phone, CreditCard,
+  Clock, Eye, Network, Ban, CheckCircle, XCircle,
+  Activity, Globe, Users, Download, Share2, Fingerprint, Camera, Bell
 } from 'lucide-react';
 
 interface ConsolidatedPerson {
@@ -259,12 +258,12 @@ const samplePerson: ConsolidatedPerson = {
 };
 
 export default function ConsolidatedIDPage() {
-  const { nationalId } = useParams();
+  // const { nationalId } = useParams();
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState('overview');
   const [person] = useState<ConsolidatedPerson>(samplePerson);
-  const [showActionModal, setShowActionModal] = useState(false);
-  const [selectedAction, setSelectedAction] = useState<string | null>(null);
+  // const [showActionModal, setShowActionModal] = useState(false);
+  // const [selectedAction, setSelectedAction] = useState<string | null>(null);
 
   const getRiskColor = (level: string) => {
     switch (level) {
@@ -659,42 +658,7 @@ export default function ConsolidatedIDPage() {
         </div>
       </div>
 
-      {/* Action Modal */}
-      {showActionModal && selectedAction && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
-            <div className="p-6 border-b border-slate-200">
-              <h3 className="text-xl font-bold text-slate-900">Confirm Action</h3>
-            </div>
-            <div className="p-6">
-              <p className="text-slate-700 mb-4">
-                You are about to execute: <strong className="capitalize">{selectedAction.replace(/_/g, ' ')}</strong>
-              </p>
-              <p className="text-sm text-slate-600">
-                This action will be logged in the system audit trail and notify relevant personnel.
-              </p>
-            </div>
-            <div className="p-6 border-t border-slate-200 flex items-center justify-end gap-3">
-              <button
-                onClick={() => setShowActionModal(false)}
-                className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  // Here we'll integrate with the AI Command Center
-                  console.log(`Executing action: ${selectedAction}`);
-                  setShowActionModal(false);
-                }}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Execute Action
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Action Modal removed */ }
     </div>
   );
 }

@@ -35,31 +35,30 @@ export default function Dashboard() {
         <StatCard
           title="Total Enrollments"
           value={stats.totalEnrollments.toLocaleString()}
-          change={12.5}
+          trend={{ value: '12.5%', direction: 'up' }}
           icon={Users}
-          color="blue"
+          variant="info"
         />
         <StatCard
           title="Active Foreigners"
           value={stats.activeForeigners.toLocaleString()}
-          change={8.3}
+          trend={{ value: '8.3%', direction: 'up' }}
           icon={Globe}
-          color="green"
+          variant="success"
         />
         <StatCard
           title="Overstays Detected"
           value={stats.overstays}
-          change={-5.2}
-          changeLabel="decrease"
+          trend={{ value: '5.2%', direction: 'down', label: 'decrease' }}
           icon={Shield}
-          color="red"
+          variant="error"
         />
         <StatCard
           title="System Health"
           value={`${agencyHealth?.healthScore || 0}%`}
           subtitle={`${agencyHealth?.online || 0}/${agencyHealth?.total || 0} agencies online`}
           icon={Activity}
-          color="purple"
+          variant="default"
         />
       </div>
 

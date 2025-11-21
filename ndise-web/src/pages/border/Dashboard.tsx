@@ -5,7 +5,7 @@ import {
 } from 'lucide-react';
 import { StatCard } from '../../components/ui';
 import { getBorderCheckpoints } from '../../lib/geospatial';
-import { calculateRiskScore, analyzePatterns } from '../../lib/aiService';
+import { analyzePatterns } from '../../lib/aiService';
 import { getAllAgencies } from '../../lib/agencyIntegration';
 
 interface RecentCrossing {
@@ -140,28 +140,28 @@ export default function BorderDashboard() {
           value={totalCrossingsToday.toString()}
           subtitle={`${checkpoints.filter(cp => cp.status === 'operational').length} checkpoints active`}
           icon={Plane}
-          color="blue"
+          variant="info"
         />
         <StatCard
           title="Active Foreigners"
           value="45,234"
           subtitle="Currently in Liberia"
           icon={Users}
-          color="green"
+          variant="success"
         />
         <StatCard
           title="Security Alerts"
           value={totalAlertsToday.toString()}
           subtitle="Last 24 hours"
           icon={AlertTriangle}
-          color="red"
+          variant="error"
         />
         <StatCard
           title="Overstays"
           value="87"
           subtitle="Visa expired"
           icon={Clock}
-          color="orange"
+          variant="warning"
         />
       </div>
 

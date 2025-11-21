@@ -2,15 +2,11 @@ import { useState } from 'react';
 import {
   Bell,
   Shield,
-  Globe,
   Eye,
   Download,
   Clock,
   Database,
   Key,
-  Users,
-  Mail,
-  Smartphone,
   Monitor,
   Sun,
   Moon,
@@ -25,7 +21,7 @@ interface UniversalSettingsProps {
   dashboardType: 'border' | 'police' | 'enrollment' | 'executive' | 'nsa' | 'agency' | 'admin';
 }
 
-export default function UniversalSettings({ dashboardName, dashboardType }: UniversalSettingsProps) {
+export default function UniversalSettings({ dashboardName }: UniversalSettingsProps) {
   const [settings, setSettings] = useState({
     // Notification Settings
     emailNotifications: true,

@@ -11,7 +11,7 @@ export interface NDISEAlert {
   severity: 'critical' | 'high' | 'medium' | 'low' | 'info';
   title: string;
   message: string;
-  data: {
+  data?: {
     nationalId?: string;
     personName?: string;
     location?: string;
@@ -178,6 +178,7 @@ export function createAlert(alert: Omit<NDISEAlert, 'id' | 'createdAt' | 'status
     id: `alert-${Date.now()}`,
     createdAt: new Date(),
     status: 'active',
+    data: alert.data || {},
   };
 
   alertDatabase.push(newAlert);
@@ -238,7 +239,7 @@ export function getAlertsForAgency(agency: string, options?: {
  */
 export function getAlertsForPerson(nationalId: string): NDISEAlert[] {
   return alertDatabase.filter(alert =>
-    alert.data.nationalId === nationalId &&
+    alert.data?.nationalId === nationalId &&
     alert.status === 'active'
   );
 }
@@ -315,6 +316,11 @@ export function resolveAlert(alertId: string, resolvedBy: string, resolution: st
   if (!alert) return false;
 
   alert.status = 'resolved';
+  
+  if (!alert.data) {
+    alert.data = {};
+  }
+  
   if (!alert.data.metadata) {
     alert.data.metadata = {};
   }

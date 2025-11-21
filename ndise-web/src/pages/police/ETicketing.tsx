@@ -14,7 +14,7 @@ interface Ticket {
 }
 
 export default function ETicketing() {
-  const [tickets, setTickets] = useState<Ticket[]>([
+  const [tickets] = useState<Ticket[]>([
     {
       id: 'TCK-2024-9901',
       offense: 'Speeding (20km/h over limit)',

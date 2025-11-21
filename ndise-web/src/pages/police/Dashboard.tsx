@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import {
-  Shield, Users, AlertTriangle, Search, Network,
+  Shield, AlertTriangle, Search, Network,
   TrendingUp, FileText, Activity, Brain, Eye, X
 } from 'lucide-react';
 import { StatCard } from '../../components/ui';
-import { mapRelationships, analyzePatterns } from '../../lib/aiService';
+import { analyzePatterns } from '../../lib/aiService';
 import { getAllAgencies } from '../../lib/agencyIntegration';
 import NetworkGraph from '../../components/NetworkGraph';
 import { investigationNetwork } from '../../utils/networkData';
@@ -115,28 +115,28 @@ export default function PoliceDashboard() {
           value="47"
           subtitle="Under investigation"
           icon={FileText}
-          color="blue"
+          variant="info"
         />
         <StatCard
           title="Wanted Persons"
           value="23"
           subtitle="Active warrants"
           icon={AlertTriangle}
-          color="red"
+          variant="error"
         />
         <StatCard
           title="Today's Searches"
           value="156"
           subtitle="Database queries"
           icon={Search}
-          color="green"
+          variant="success"
         />
         <StatCard
           title="AI Leads Generated"
           value="12"
           subtitle="Past 7 days"
           icon={Brain}
-          color="purple"
+          variant="default"
         />
       </div>
 

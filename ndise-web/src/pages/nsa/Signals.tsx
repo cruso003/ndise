@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Radio, Wifi, Phone, Globe, Lock, Unlock, AlertTriangle, BarChart2 } from 'lucide-react';
+// import { useState } from 'react';
+import { Radio, Wifi, Phone, Globe, Lock, Unlock, AlertTriangle, BarChart2, Activity } from 'lucide-react';
 
 interface Signal {
   id: string;
@@ -15,7 +15,7 @@ interface Signal {
 }
 
 export default function Signals() {
-  const [filter, setFilter] = useState('all');
+  // const [filter, setFilter] = useState('all');
 
   const signals: Signal[] = [
     {
