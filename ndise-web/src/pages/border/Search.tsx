@@ -5,6 +5,9 @@ import {
   FileText, MapPin, Calendar, Phone, Mail, Fingerprint, Camera, Globe,
   TrendingUp, History, Eye, Download, Flag, Award, Ban, ExternalLink
 } from 'lucide-react';
+import { addToWatchlist } from '../../services/watchlistService';
+import { createBorderCrossingAlert, createAlert } from '../../services/alertService';
+import { useToast } from '../../context/ToastContext';
 
 interface SearchResult {
   id: string;
@@ -50,12 +53,16 @@ interface SearchResult {
 
 export default function BorderSearch() {
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const [searchType, setSearchType] = useState<'passport' | 'national_id' | 'name' | 'biometric'>('passport');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [selectedPerson, setSelectedPerson] = useState<SearchResult | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [confirmAction, setConfirmAction] = useState<'detain' | 'approve' | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   // Advanced search filters
   const [filters, setFilters] = useState({
@@ -178,6 +185,114 @@ export default function BorderSearch() {
       setSearchResults(sampleResults);
       setIsSearching(false);
     }, 1000);
+  };
+
+  const handleDetain = async () => {
+    if (!selectedPerson) return;
+
+    setIsProcessing(true);
+    setShowConfirmModal(false);
+
+    try {
+      // Add to unified watchlist
+      addToWatchlist({
+        nationalId: selectedPerson.nationalID || selectedPerson.id,
+        personName: selectedPerson.name,
+        reason: `Detained at border checkpoint. ${selectedPerson.notes || 'Security concern.'}`,
+        reasonCode: 'border_security',
+        severity: selectedPerson.riskLevel === 'critical' || selectedPerson.riskLevel === 'high' ? 'critical' : 'high',
+        addedBy: 'Border',
+        addedByUser: 'Officer John Dolo',
+        actions: [
+          {
+            type: 'detention',
+            description: 'Person detained at checkpoint - NSA notified',
+            agencies: ['border', 'police', 'nsa'],
+          },
+          {
+            type: 'notify_agency',
+            description: 'Immediate NSA tactical response requested',
+            agencies: ['nsa'],
+          },
+        ],
+      });
+
+      // Create border crossing alert
+      createBorderCrossingAlert({
+        nationalId: selectedPerson.nationalID || selectedPerson.id,
+        personName: selectedPerson.name,
+        checkpoint: 'Current Checkpoint',
+        location: 'Border Control Station',
+        type: 'detained',
+        severity: 'critical',
+        createdByUser: 'Officer John Dolo',
+      });
+
+      // Show success
+      showToast('Person detained successfully. NSA has been notified.', 'success');
+
+      // Update local state
+      setSelectedPerson({ ...selectedPerson, status: 'watchlist' });
+      setSearchResults(prev =>
+        prev.map(p =>
+          p.id === selectedPerson.id ? { ...p, status: 'watchlist' as const } : p
+        )
+      );
+
+      // Close modal after short delay
+      setTimeout(() => {
+        setShowDetailModal(false);
+      }, 2000);
+    } catch (error) {
+      showToast('Failed to detain person. Please try again.', 'error');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleApproveEntry = async () => {
+    if (!selectedPerson) return;
+
+    setIsProcessing(true);
+    setShowConfirmModal(false);
+
+    try {
+      // Create border crossing alert (low severity for approved entry)
+      createBorderCrossingAlert({
+        nationalId: selectedPerson.nationalID || selectedPerson.id,
+        personName: selectedPerson.name,
+        checkpoint: 'Current Checkpoint',
+        location: 'Border Control Station',
+        type: 'entry',
+        severity: 'low',
+        createdByUser: 'Officer John Dolo',
+      });
+
+      // Show success
+      showToast(`Entry approved for ${selectedPerson.name}. Border crossing logged.`, 'success');
+
+      // Close modal after short delay
+      setTimeout(() => {
+        setShowDetailModal(false);
+      }, 1500);
+    } catch (error) {
+      showToast('Failed to approve entry. Please try again.', 'error');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handlePrintReport = () => {
+    if (!selectedPerson) return;
+
+    showToast('Generating PDF report...', 'info');
+
+    // Simulate PDF generation
+    setTimeout(() => {
+      showToast('Report generated successfully!', 'success');
+      // In production: trigger actual PDF download
+      console.log('PDF Report for:', selectedPerson.name);
+    }, 1500);
   };
 
   const getRiskColor = (level: string) => {
@@ -720,20 +835,180 @@ export default function BorderSearch() {
                 >
                   Close
                 </button>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <button
+                  onClick={handlePrintReport}
+                  disabled={isProcessing}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                >
                   Print Report
                 </button>
                 {selectedPerson.status === 'watchlist' || selectedPerson.status === 'flagged' ? (
-                  <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
-                    Detain & Notify NSA
+                  <button
+                    onClick={() => {
+                      setConfirmAction('detain');
+                      setShowConfirmModal(true);
+                    }}
+                    disabled={isProcessing}
+                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
+                  >
+                    {isProcessing ? 'Processing...' : 'Detain & Notify NSA'}
                   </button>
                 ) : (
-                  <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                    Approve Entry
+                  <button
+                    onClick={() => {
+                      setConfirmAction('approve');
+                      setShowConfirmModal(true);
+                    }}
+                    disabled={isProcessing}
+                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
+                  >
+                    {isProcessing ? 'Processing...' : 'Approve Entry'}
                   </button>
                 )}
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Confirmation Modal */}
+      {showConfirmModal && selectedPerson && confirmAction && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[60] p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full">
+            {confirmAction === 'detain' ? (
+              <>
+                {/* Detain Confirmation */}
+                <div className="bg-red-600 px-6 py-4 rounded-t-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                      <AlertTriangle className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">Confirm Detention</h3>
+                      <p className="text-red-100 text-sm">This action will alert NSA immediately</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6 space-y-4">
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div className="flex items-start gap-3">
+                      <Shield className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-red-900 mb-1">You are about to detain:</p>
+                        <p className="text-lg font-bold text-red-800">{selectedPerson.name}</p>
+                        <p className="text-sm text-red-700 mt-1">ID: {selectedPerson.nationalID || selectedPerson.id}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-50 rounded-lg p-4 space-y-2 text-sm">
+                    <div className="flex items-center gap-2 text-slate-700">
+                      <CheckCircle className="w-4 h-4 text-slate-500" />
+                      <span>Person will be added to national watchlist</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-700">
+                      <CheckCircle className="w-4 h-4 text-slate-500" />
+                      <span>Alert broadcast to Border, Police, and NSA</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-700">
+                      <CheckCircle className="w-4 h-4 text-slate-500" />
+                      <span>NSA tactical response will be requested</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-700">
+                      <CheckCircle className="w-4 h-4 text-slate-500" />
+                      <span>All agencies will be notified in real-time</span>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-slate-600 italic">
+                    This is a critical security action. Please ensure you have verified the person's identity.
+                  </p>
+                </div>
+                <div className="bg-slate-50 px-6 py-4 rounded-b-xl flex items-center justify-end gap-3">
+                  <button
+                    onClick={() => {
+                      setShowConfirmModal(false);
+                      setConfirmAction(null);
+                    }}
+                    className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-white transition-colors font-medium"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleDetain}
+                    className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
+                  >
+                    Confirm Detention
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Approve Entry Confirmation */}
+                <div className="bg-green-600 px-6 py-4 rounded-t-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                      <CheckCircle className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">Approve Entry</h3>
+                      <p className="text-green-100 text-sm">Authorize border crossing</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6 space-y-4">
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <div className="flex items-start gap-3">
+                      <User className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-green-900 mb-1">You are approving entry for:</p>
+                        <p className="text-lg font-bold text-green-800">{selectedPerson.name}</p>
+                        <p className="text-sm text-green-700 mt-1">ID: {selectedPerson.nationalID || selectedPerson.id}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-50 rounded-lg p-4 space-y-2 text-sm">
+                    <div className="flex items-center gap-2 text-slate-700">
+                      <CheckCircle className="w-4 h-4 text-slate-500" />
+                      <span>Border crossing will be logged to NDISE</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-700">
+                      <CheckCircle className="w-4 h-4 text-slate-500" />
+                      <span>Entry timestamp and checkpoint recorded</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-700">
+                      <CheckCircle className="w-4 h-4 text-slate-500" />
+                      <span>Travel history updated in real-time</span>
+                    </div>
+                  </div>
+
+                  {selectedPerson.visaStatus && (
+                    <div className="flex items-center gap-2 text-sm text-slate-600">
+                      <Calendar className="w-4 h-4" />
+                      <span>Visa Status: <span className="font-semibold">{selectedPerson.visaStatus.status}</span> • Expires {selectedPerson.visaStatus.expiryDate}</span>
+                    </div>
+                  )}
+                </div>
+                <div className="bg-slate-50 px-6 py-4 rounded-b-xl flex items-center justify-end gap-3">
+                  <button
+                    onClick={() => {
+                      setShowConfirmModal(false);
+                      setConfirmAction(null);
+                    }}
+                    className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-white transition-colors font-medium"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleApproveEntry}
+                    className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
+                  >
+                    Approve Entry
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
