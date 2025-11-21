@@ -440,21 +440,21 @@ function App() {
                         </ProtectedRoute>
                       } 
                     />
-                    <Route 
-                      path="verification" 
+                    <Route
+                      path="verification"
                       element={
-                        <ProtectedRoute requiredPermissions={['agency:write']}>
+                        <ProtectedRoute requiredPermissions={['agency:read']}>
                           <Verification />
                         </ProtectedRoute>
-                      } 
+                      }
                     />
-                    <Route 
-                      path="batch" 
+                    <Route
+                      path="batch"
                       element={
-                        <ProtectedRoute requiredPermissions={['agency:write']}>
+                        <ProtectedRoute requiredPermissions={['agency:read']}>
                           <BatchVerification />
                         </ProtectedRoute>
-                      } 
+                      }
                     />
                     <Route 
                       path="api-keys" 
