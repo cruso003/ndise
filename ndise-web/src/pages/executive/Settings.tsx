@@ -1,4 +1,5 @@
-import PagePlaceholder from '../../components/PagePlaceholder';
+import UniversalSettings from '../../components/UniversalSettings';
+
 export default function ExecutiveSettings() {
-  return <PagePlaceholder title="Executive Settings" description="User preferences and notification settings" />;
+  return <UniversalSettings dashboardName="Executive" dashboardType="executive" />;
 }

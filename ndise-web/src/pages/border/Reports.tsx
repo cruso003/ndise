@@ -1,4 +1,5 @@
-import PagePlaceholder from '../../components/PagePlaceholder';
+import UniversalReports from '../../components/UniversalReports';
+
 export default function BorderReports() {
-  return <PagePlaceholder title="Border Reports" description="Generate border control statistics and compliance reports" />;
+  return <UniversalReports dashboardName="Border Control" dashboardType="border" />;
 }

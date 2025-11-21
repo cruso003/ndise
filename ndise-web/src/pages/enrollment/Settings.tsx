@@ -1,10 +1,5 @@
-import PagePlaceholder from '../../components/PagePlaceholder';
+import UniversalSettings from '../../components/UniversalSettings';
 
 export default function EnrollmentSettings() {
-  return (
-    <PagePlaceholder
-      title="Enrollment Settings"
-      description="Configure enrollment preferences and hardware settings"
-    />
-  );
+  return <UniversalSettings dashboardName="Enrollment" dashboardType="enrollment" />;
 }
