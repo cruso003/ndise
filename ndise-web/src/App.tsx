@@ -104,7 +104,13 @@ function RootRedirect() {
 
 function App() {
   return (
-    <ThemeProvider>
+    <>
+      {/* Official Liberia Seal Watermark */}
+      <div className="fixed inset-0 flex items-center justify-center z-[999] pointer-events-none">
+        <div className="w-[800px] h-[800px] opacity-[0.07] dark:opacity-[0.05] bg-contain bg-center bg-no-repeat transform scale-100 transition-all duration-700 ease-in-out liberia-seal-background" />
+      </div>
+      <div className="relative z-[2]">
+        <ThemeProvider>
       <AuthProvider>
         <ToastProvider>
           <Router>
@@ -569,6 +575,8 @@ function App() {
         </ToastProvider>
       </AuthProvider>
     </ThemeProvider>
+      </div>
+    </>
   );
 }
 

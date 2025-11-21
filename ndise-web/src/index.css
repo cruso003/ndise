@@ -48,7 +48,13 @@ body {
   transition-timing-function: ease-in-out;
 }
 
+
 /* Prevent transition on page load */
 .no-transition * {
   transition: none !important;
+}
+
+/* Official Government Watermark - Liberia Seal */
+.liberia-seal-background {
+  background-image: url('/liberia-seal.svg');
 }
