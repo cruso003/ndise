@@ -617,17 +617,38 @@ export default function BorderSearch() {
                         <ExternalLink className="w-4 h-4" />
                         View Full Profile
                       </button>
-                      <button className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-sm font-medium">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedPerson(person);
+                          setShowDetailModal(true);
+                        }}
+                        className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-sm font-medium"
+                      >
                         <History className="w-4 h-4 inline mr-1" />
                         Travel History
                       </button>
                       {person.status === 'watchlist' || person.status === 'flagged' ? (
-                        <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedPerson(person);
+                            setShowDetailModal(true);
+                          }}
+                          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium"
+                        >
                           <Shield className="w-4 h-4 inline mr-1" />
                           Detain
                         </button>
                       ) : (
-                        <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedPerson(person);
+                            setShowDetailModal(true);
+                          }}
+                          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+                        >
                           <CheckCircle className="w-4 h-4 inline mr-1" />
                           Clear Entry
                         </button>
