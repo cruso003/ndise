@@ -156,31 +156,156 @@ All demo accounts use the password: `demo2024`
 
 ---
 
-### Agency Partner (Bank/Telco)
+### Agency Partners (Banks, Telecoms, Insurance)
 
-**Username:** `agency.partner`  
-**Password:** `demo2024`  
-**Full Name:** Janet Williams  
-**Role:** Agency  
-**Department:** Ecobank Liberia - KYC Department  
+NDISE provides API access to private sector partners for identity verification. Each partner organization has their own login with customized dashboards showing organization-specific metrics.
+
+---
+
+#### 🏦 Bank Partners
+
+**Ecobank Liberia** (Primary Demo)
+
+**Username:** `bank.ecobank`
+**Password:** `demo2024`
+**Full Name:** Janet Williams
+**Role:** Agency Partner
+**Department:** KYC Department
 **Email:** j.williams@ecobank.com
+**Organization Type:** Bank
 
 **Access:**
-- Agency Services Dashboard
+- Agency Services Dashboard (customized for Ecobank)
+- Quick Verification (web UI for bank tellers)
+- Verification History (audit trail)
+- Fraud & Watchlist Alerts
+- Batch Processing
 - API Usage Monitoring
-- Verification Tools
-- Executive Dashboard
 
 **What You'll See:**
-- API usage statistics and performance
-- Identity verification success rates
-- Integration health metrics
-- Cost tracking for API calls
+- Organization-specific header: "Ecobank Liberia - KYC Department"
+- Watchlist alerts (persons on police wanted list)
+- Fraud alerts (8+ bank accounts opened = suspicious)
+- Bank account statistics for each verified person
+- Monthly usage: 35,678 verifications
 
 **Use This To Demo:**
-- Bank KYC verification workflow
-- Instant identity verification (< 200ms)
-- API performance monitoring
+- Bank teller opening account for walk-in customer
+- Quick Verification tab (enter National ID → instant results)
+- Watchlist integration (detect wanted criminals)
+- Fraud detection (person with 8 accounts flagged)
+
+---
+
+**UBA Liberia**
+
+**Username:** `bank.uba`
+**Password:** `demo2024`
+**Full Name:** Michael Koffa
+**Department:** Compliance & KYC
+**Organization Type:** Bank
+
+Shows UBA-specific metrics and branding.
+
+---
+
+**GTBank Liberia**
+
+**Username:** `bank.gtbank`
+**Password:** `demo2024`
+**Full Name:** Rebecca Tubman
+**Department:** Customer Onboarding
+**Organization Type:** Bank
+
+Shows GTBank-specific metrics and branding.
+
+---
+
+#### 📱 Telecom Partners
+
+**Lonestar Cell MTN**
+
+**Username:** `telecom.lonestar`
+**Password:** `demo2024`
+**Full Name:** Samuel Nyemah
+**Role:** Agency Partner
+**Department:** Customer Registration
+**Email:** s.nyemah@lonestar.lr
+**Organization Type:** Telecom
+
+**Access:**
+- Agency Services Dashboard (customized for Lonestar)
+- Quick Verification (web UI for retail shop agents)
+- SIM Card fraud detection (5+ SIMs = suspicious)
+- Verification History
+- Alerts & Notifications
+
+**What You'll See:**
+- Organization-specific header: "Lonestar Cell MTN - Customer Registration"
+- SIM card statistics for each verified person
+- Fraud alerts (person with 5 SIM cards flagged)
+- Higher request volume than banks (62,345/month)
+- Telecom-specific metrics
+
+**Use This To Demo:**
+- Retail agent selling SIM card at shop
+- Quick Verification shows "SIM Cards: 5" → fraud alert
+- Agent refuses to issue additional SIM (prevents SIM box fraud)
+- Regulatory compliance reporting
+
+---
+
+**Orange Liberia**
+
+**Username:** `telecom.orange`
+**Password:** `demo2024`
+**Full Name:** Grace Boakai
+**Department:** SIM Registration
+**Organization Type:** Telecom
+
+Shows Orange-specific metrics and branding.
+
+---
+
+#### 🏥 Insurance Partners
+
+**Imperial Insurance Company**
+
+**Username:** `insurance.imperial`
+**Password:** `demo2024`
+**Full Name:** Thomas Zubah
+**Role:** Agency Partner
+**Department:** Claims Processing
+**Email:** t.zubah@imperialinsurance.lr
+**Organization Type:** Insurance
+
+**Access:**
+- Agency Services Dashboard (customized for Imperial Insurance)
+- Quick Verification (web UI for claims processors)
+- Watchlist alerts (prevent fraud)
+- Verification History
+- Lower request volume (13,567/month)
+
+**What You'll See:**
+- Organization-specific header: "Imperial Insurance Company - Claims Processing"
+- Watchlist integration (detect fraudulent beneficiaries)
+- Insurance-specific fraud detection
+- Claims verification workflow
+
+**Use This To Demo:**
+- Claims processor verifying beneficiary identity
+- Detects duplicate claims across multiple insurers
+- Watchlist check before paying out claims
+
+---
+
+#### 🔄 Legacy Login (Backward Compatibility)
+
+**Username:** `agency.partner`
+**Password:** `demo2024`
+**Full Name:** Janet Williams (Ecobank)
+
+This username still works and redirects to the Ecobank dashboard for backward compatibility.
 
 ---
 

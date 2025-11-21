@@ -2,18 +2,45 @@ import { useState } from 'react';
 import { Key, Activity, TrendingUp, Users, CheckCircle, AlertTriangle, Shield, Clock, Bell, Search } from 'lucide-react';
 import { StatCard } from '../../components/ui';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 export default function AgencyDashboard() {
+  const { user } = useAuth();
   const [timeframe, setTimeframe] = useState<'today' | 'week' | 'month'>('today');
 
-  const stats = {
-    today: { requests: 1247, successful: 1198, failed: 49, avgResponse: 145, watchlistHits: 3, fraudAlerts: 2 },
-    week: { requests: 8934, successful: 8712, failed: 222, avgResponse: 152, watchlistHits: 12, fraudAlerts: 8 },
-    month: { requests: 35678, successful: 34890, failed: 788, avgResponse: 148, watchlistHits: 45, fraudAlerts: 23 }
+  // Partner-specific stats (simulated - in production, would come from API)
+  const getPartnerStats = () => {
+    const baseStats = {
+      today: { requests: 1247, successful: 1198, failed: 49, avgResponse: 145, watchlistHits: 3, fraudAlerts: 2 },
+      week: { requests: 8934, successful: 8712, failed: 222, avgResponse: 152, watchlistHits: 12, fraudAlerts: 8 },
+      month: { requests: 35678, successful: 34890, failed: 788, avgResponse: 148, watchlistHits: 45, fraudAlerts: 23 }
+    };
+
+    // Adjust stats based on organization type
+    if (user?.organizationType === 'telecom') {
+      return {
+        today: { requests: 2145, successful: 2089, failed: 56, avgResponse: 138, watchlistHits: 5, fraudAlerts: 4 },
+        week: { requests: 15234, successful: 14912, failed: 322, avgResponse: 142, watchlistHits: 18, fraudAlerts: 12 },
+        month: { requests: 62345, successful: 61234, failed: 1111, avgResponse: 140, watchlistHits: 67, fraudAlerts: 34 }
+      };
+    } else if (user?.organizationType === 'insurance') {
+      return {
+        today: { requests: 456, successful: 445, failed: 11, avgResponse: 152, watchlistHits: 1, fraudAlerts: 1 },
+        week: { requests: 3234, successful: 3156, failed: 78, avgResponse: 155, watchlistHits: 4, fraudAlerts: 3 },
+        month: { requests: 13567, successful: 13245, failed: 322, avgResponse: 153, watchlistHits: 15, fraudAlerts: 8 }
+      };
+    }
+
+    return baseStats; // Banks use base stats
   };
 
+  const stats = getPartnerStats();
   const currentStats = stats[timeframe];
   const successRate = ((currentStats.successful / currentStats.requests) * 100).toFixed(1);
+
+  // Get organization display name
+  const organizationName = user?.organization || 'Partner Organization';
+  const departmentName = user?.department || 'Department';
 
   return (
     <div className="space-y-6">
@@ -21,7 +48,7 @@ export default function AgencyDashboard() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-slate-900">Agency Services Dashboard</h1>
-            <p className="text-slate-600 mt-1">Identity verification for Ecobank Liberia - KYC Department</p>
+            <p className="text-slate-600 mt-1">Identity verification for {organizationName} - {departmentName}</p>
           </div>
           <Link
             to="/agency/verification"

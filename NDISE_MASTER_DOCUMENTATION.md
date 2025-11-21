@@ -1059,21 +1059,107 @@ Role: Enrollment - Civil Registry Paynesville
 
 ---
 
-### 🏢 Agency Partner (Ecobank Example)
+### 🏢 Agency Partners (Banks, Telecoms, Insurance)
 
+Each partner organization has customized dashboards showing organization-specific metrics.
+
+#### Bank Partners
+
+**Ecobank Liberia** (Primary Demo)
 ```
-Username: agency.partner
+Username: bank.ecobank
 Password: demo2024
 Full Name: Janet Williams
 Dashboard: /agency
 Organization: Ecobank Liberia - KYC Department
+Type: Bank
+```
+
+**UBA Liberia**
+```
+Username: bank.uba
+Password: demo2024
+Full Name: Michael Koffa
+Organization: UBA Liberia - Compliance & KYC
+Type: Bank
+```
+
+**GTBank Liberia**
+```
+Username: bank.gtbank
+Password: demo2024
+Full Name: Rebecca Tubman
+Organization: GTBank Liberia - Customer Onboarding
+Type: Bank
+```
+
+#### Telecom Partners
+
+**Lonestar Cell MTN**
+```
+Username: telecom.lonestar
+Password: demo2024
+Full Name: Samuel Nyemah
+Organization: Lonestar Cell MTN - Customer Registration
+Type: Telecom
+Monthly Requests: 62,345 (higher volume than banks)
+```
+
+**Orange Liberia**
+```
+Username: telecom.orange
+Password: demo2024
+Full Name: Grace Boakai
+Organization: Orange Liberia - SIM Registration
+Type: Telecom
+```
+
+#### Insurance Partners
+
+**Imperial Insurance Company**
+```
+Username: insurance.imperial
+Password: demo2024
+Full Name: Thomas Zubah
+Organization: Imperial Insurance Company - Claims Processing
+Type: Insurance
+Monthly Requests: 13,567 (lower volume than banks/telecoms)
+```
+
+#### Legacy Login (Backward Compatibility)
+```
+Username: agency.partner
+Password: demo2024
+Full Name: Janet Williams (redirects to Ecobank dashboard)
 ```
 
 **Test Scenarios**:
-1. View API usage dashboard
-2. Check monthly statistics
-3. Download usage reports
-4. Test identity verification API
+1. **Bank Teller Workflow** (bank.ecobank):
+   - Quick Verification tab
+   - Enter National ID: `1992030398765432`
+   - See HIGH RISK watchlist alert (Marcus Gaye)
+   - Deny account opening, escalate to manager
+
+2. **Telecom Agent Workflow** (telecom.lonestar):
+   - Quick Verification tab
+   - Enter National ID: `1988121298765432`
+   - See FRAUD ALERT: 5 SIM cards registered
+   - Refuse to issue additional SIM card
+
+3. **Insurance Claims Workflow** (insurance.imperial):
+   - Quick Verification tab
+   - Check watchlist before paying claims
+   - Detect duplicate claims across insurers
+
+4. **Verification History Audit** (any partner):
+   - View complete audit trail
+   - Filter by high-risk verifications
+   - Export for compliance reporting
+
+5. **Fraud Alerts** (any partner):
+   - View watchlist notifications
+   - See fraud pattern alerts (8+ accounts, 5+ SIMs)
+   - Monitor system alerts
 
 ---
 
