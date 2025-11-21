@@ -28,6 +28,7 @@ import {
   Camera,
   Target,
   Radio,
+  Zap,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { useAuth } from '../context/AuthContext';
@@ -83,6 +84,7 @@ export default function Layout() {
         permissions: ['nsa:read'],
         items: [
           { icon: Shield, label: 'Operations Center', to: '/nsa/operations-center', permissions: ['nsa:read'] },
+          { icon: Zap, label: 'AI Command Center', to: '/nsa/ai-command', permissions: ['nsa:read'] },
           { icon: Camera, label: 'Surveillance (CCTV)', to: '/nsa/surveillance', permissions: ['nsa:read'] },
           { icon: Target, label: 'Target Tracking', to: '/nsa/tracking', permissions: ['nsa:read'] },
           { icon: Radio, label: 'Signals Intelligence', to: '/nsa/signals', permissions: ['nsa:read'] },

@@ -56,6 +56,7 @@ import NSASurveillance from './pages/nsa/Surveillance';
 import NSATracking from './pages/nsa/Tracking';
 import NSASignals from './pages/nsa/Signals';
 import NSAReports from './pages/nsa/Reports';
+import AICommand from './pages/nsa/AICommand';
 
 // Admin pages
 import AdminDashboard from './pages/admin/Dashboard';
@@ -64,6 +65,8 @@ import RoleManagement from './pages/admin/Roles';
 import AdminAuditLogs from './pages/admin/AuditLogs';
 import SystemConfig from './pages/admin/SystemConfig';
 
+// Consolidated pages
+import ConsolidatedIDPage from './pages/ConsolidatedIDPage';
 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
@@ -112,49 +115,63 @@ function App() {
               {/* Protected Routes */}
               <Route element={<ProtectedRoute />}>
                 <Route element={<Layout />}>
-                  
+
+                  {/* Consolidated National ID Page - Accessible to all authenticated users */}
+                  <Route
+                    path="/id/:nationalId"
+                    element={<ConsolidatedIDPage />}
+                  />
+
                   {/* NSA Operations Center (PRIMARY) */}
                   <Route path="/nsa">
                     <Route index element={<Navigate to="/nsa/operations-center" replace />} />
-                    <Route 
-                      path="operations-center" 
+                    <Route
+                      path="operations-center"
                       element={
                         <ProtectedRoute requiredPermissions={['nsa:read']}>
                           <NSAOperationsCenter />
                         </ProtectedRoute>
-                      } 
+                      }
                     />
-                    <Route 
-                      path="surveillance" 
+                    <Route
+                      path="ai-command"
+                      element={
+                        <ProtectedRoute requiredPermissions={['nsa:read']}>
+                          <AICommand />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="surveillance"
                       element={
                         <ProtectedRoute requiredPermissions={['nsa:read']}>
                           <NSASurveillance />
                         </ProtectedRoute>
-                      } 
+                      }
                     />
-                    <Route 
-                      path="tracking" 
+                    <Route
+                      path="tracking"
                       element={
                         <ProtectedRoute requiredPermissions={['nsa:read']}>
                           <NSATracking />
                         </ProtectedRoute>
-                      } 
+                      }
                     />
-                    <Route 
-                      path="signals" 
+                    <Route
+                      path="signals"
                       element={
                         <ProtectedRoute requiredPermissions={['nsa:read']}>
                           <NSASignals />
                         </ProtectedRoute>
-                      } 
+                      }
                     />
-                    <Route 
-                      path="reports" 
+                    <Route
+                      path="reports"
                       element={
                         <ProtectedRoute requiredPermissions={['nsa:read']}>
                           <NSAReports />
                         </ProtectedRoute>
-                      } 
+                      }
                     />
                   </Route>
                   

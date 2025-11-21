@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Search as SearchIcon, User, AlertTriangle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Search as SearchIcon, User, AlertTriangle, ExternalLink } from 'lucide-react';
 import ConsolidatedProfileView from '../../components/ConsolidatedProfileView';
 import { consolidatePersonData } from '../../lib/apiIntegration';
 
 export default function Search() {
+  const navigate = useNavigate();
   const [searchType, setSearchType] = useState<'national_id' | 'passport' | 'name'>('national_id');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
@@ -123,7 +125,18 @@ export default function Search() {
 
       {/* Search Results */}
       {selectedPerson ? (
-        <ConsolidatedProfileView person={selectedPerson} onClose={() => setSelectedPerson(null)} />
+        <div className="space-y-4">
+          <div className="flex justify-end">
+            <button
+              onClick={() => navigate(`/id/${selectedPerson.nationalId}`)}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors"
+            >
+              <ExternalLink className="w-4 h-4" />
+              View Full Profile Page
+            </button>
+          </div>
+          <ConsolidatedProfileView person={selectedPerson} onClose={() => setSelectedPerson(null)} />
+        </div>
       ) : searchQuery && !isSearching && (
         <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-12 text-center">
           <User className="w-16 h-16 mx-auto mb-4 text-slate-300" />
