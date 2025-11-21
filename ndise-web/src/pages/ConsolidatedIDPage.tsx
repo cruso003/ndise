@@ -299,8 +299,8 @@ export default function ConsolidatedIDPage() {
   };
 
   const handleAction = (action: string) => {
-    setSelectedAction(action);
-    setShowActionModal(true);
+    // Navigate to AI Command Center with target context
+    navigate(`/nsa/ai-command?targetId=${person.nationalId}&targetName=${encodeURIComponent(person.name)}`);
   };
 
   const tabs = [
