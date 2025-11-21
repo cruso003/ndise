@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import {
   Plane, Ship, Users, AlertTriangle, CheckCircle, Clock,
   Search, Filter, MapPin, Fingerprint, Shield, Eye, XCircle,
-  TrendingUp, Activity
+  TrendingUp, Activity, Play, Pause
 } from 'lucide-react';
+import { useRealTimeSimulation, useConnectionStatus } from '../../hooks/useRealTimeSimulation';
+import LiveIndicator from '../../components/LiveIndicator';
 
 interface BiometricVerification {
   fingerprintMatch: number; // 0-100
@@ -196,30 +198,36 @@ function generateCrossing(id: number): BorderCrossing {
 }
 
 export default function LiveCrossings() {
-  const [crossings, setCrossings] = useState<BorderCrossing[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<'all' | 'approved' | 'flagged' | 'detained' | 'reviewing'>('all');
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<'all' | string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCrossing, setSelectedCrossing] = useState<BorderCrossing | null>(null);
-  const [autoRefresh, setAutoRefresh] = useState(true);
 
-  // Initialize with crossings
-  useEffect(() => {
-    const initialCrossings = Array.from({ length: 15 }, (_, i) => generateCrossing(i + 1));
-    setCrossings(initialCrossings);
-  }, []);
+  // Track crossing ID counter
+  const [crossingCounter, setCrossingCounter] = useState(1);
 
-  // Simulate real-time updates
-  useEffect(() => {
-    if (!autoRefresh) return;
+  // Real-time simulation hook
+  const {
+    items: crossings,
+    isActive: isLive,
+    lastUpdate,
+    totalGenerated,
+    controls: liveControls,
+  } = useRealTimeSimulation<BorderCrossing>(
+    () => {
+      const crossing = generateCrossing(crossingCounter);
+      setCrossingCounter(prev => prev + 1);
+      return crossing;
+    },
+    {
+      interval: 8000, // New crossing every 8 seconds
+      maxItems: 50,
+      autoStart: true,
+    }
+  );
 
-    const interval = setInterval(() => {
-      const newCrossing = generateCrossing(crossings.length + 1);
-      setCrossings(prev => [newCrossing, ...prev].slice(0, 50)); // Keep last 50
-    }, 10000); // New crossing every 10 seconds
-
-    return () => clearInterval(interval);
-  }, [autoRefresh, crossings.length]);
+  // Connection status simulation
+  const { isOnline, uptimePercentage } = useConnectionStatus();
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -299,16 +307,48 @@ export default function LiveCrossings() {
           <p className="text-slate-600 mt-1">Real-time entry/exit processing with AI risk assessment</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium ${autoRefresh ? 'bg-green-100 text-green-800' : 'bg-slate-100 text-slate-700'}`}>
-            <div className={`w-2 h-2 rounded-full ${autoRefresh ? 'bg-green-600 animate-pulse' : 'bg-slate-400'}`} />
-            {autoRefresh ? 'LIVE' : 'PAUSED'}
-          </div>
+          <LiveIndicator
+            isLive={isLive}
+            lastUpdate={lastUpdate}
+            isOnline={isOnline}
+            showTimestamp={true}
+            showConnection={true}
+          />
           <button
-            onClick={() => setAutoRefresh(!autoRefresh)}
-            className="px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800"
+            onClick={liveControls.toggle}
+            className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors"
           >
-            {autoRefresh ? 'Pause' : 'Resume'}
+            {isLive ? (
+              <>
+                <Pause className="w-4 h-4" />
+                Pause
+              </>
+            ) : (
+              <>
+                <Play className="w-4 h-4" />
+                Resume
+              </>
+            )}
           </button>
+        </div>
+      </div>
+
+      {/* Real-Time Stats Banner */}
+      <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Activity className="w-5 h-5 text-blue-600" />
+            <div>
+              <div className="text-sm font-bold text-blue-900">System Performance</div>
+              <div className="text-xs text-blue-700">
+                {totalGenerated} crossings processed • System uptime: {uptimePercentage.toFixed(2)}%
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-blue-700">
+            <Clock className="w-4 h-4" />
+            <span>Next update in ~{isLive ? '8' : '0'}s</span>
+          </div>
         </div>
       </div>
 
