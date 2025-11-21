@@ -299,8 +299,20 @@ export default function ConsolidatedIDPage() {
   };
 
   const handleAction = (action: string) => {
-    // Navigate to AI Command Center with target context
-    navigate(`/nsa/ai-command?targetId=${person.nationalId}&targetName=${encodeURIComponent(person.name)}`);
+    // Navigate to appropriate page based on action
+    const targetId = person.nationalId;
+    const targetName = encodeURIComponent(person.name);
+
+    switch (action) {
+      case 'surveillance':
+        // Go to CCTV surveillance with target context
+        navigate(`/nsa/surveillance?targetId=${targetId}&targetName=${targetName}`);
+        break;
+      default:
+        // All other actions go to AI Command Center
+        navigate(`/nsa/ai-command?targetId=${targetId}&targetName=${targetName}`);
+        break;
+    }
   };
 
   const tabs = [
