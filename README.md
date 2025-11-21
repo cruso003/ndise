@@ -53,28 +53,55 @@ NDISE unifies **15+ government agencies** under a single national identity syste
 
 ## 🔑 Demo Credentials
 
+**⚠️ All accounts use password: `demo2024`**
+
 ### Border Control Officer
 ```
-Email: border.officer@ndise.gov.lr
-Password: BorderSecure2024
+Username: border.officer
+Password: demo2024
+Name: Officer Mary Toe
 ```
 
 ### Police Officer
 ```
-Email: police.officer@ndise.gov.lr
-Password: PoliceSecure2024
+Username: police.officer
+Password: demo2024
+Name: Detective Grace Kollie
 ```
 
 ### NSA Analyst
 ```
-Email: nsa.analyst@ndise.gov.lr
-Password: NSASecure2024
+Username: nsa.analyst
+Password: demo2024
+Name: Agent Sarah Mensah
 ```
 
 ### Executive Admin
 ```
-Email: executive.admin@ndise.gov.lr
-Password: ExecutiveSecure2024
+Username: exec.admin
+Password: demo2024
+Name: Hon. James Karnley
+```
+
+### Enrollment Officer
+```
+Username: enroll.officer
+Password: demo2024
+Name: Officer Thomas Kpan
+```
+
+### Agency Partner
+```
+Username: agency.partner
+Password: demo2024
+Name: Janet Williams (Ecobank)
+```
+
+### System Admin
+```
+Username: sys.admin
+Password: demo2024
+Name: Administrator (Full Access)
 ```
 
 ### Test National IDs
@@ -83,6 +110,8 @@ Password: ExecutiveSecure2024
 1988050523456789  - Sarah Williams (Document Fraud)
 1992030134567890  - Ahmed Hassan (Smuggling)
 ```
+
+📖 **Full credential details**: See [DEMO_CREDENTIALS.md](./DEMO_CREDENTIALS.md)
 
 ---
 

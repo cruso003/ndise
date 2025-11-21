@@ -41,6 +41,8 @@ import APIKeys from './pages/agency/APIKeys';
 import APIDocumentation from './pages/agency/Documentation';
 import AgencyReports from './pages/agency/Reports';
 import AgencySettings from './pages/agency/Settings';
+import AgencyHistory from './pages/agency/History';
+import AgencyAlerts from './pages/agency/Alerts';
 
 // Executive pages
 import ExecutiveDashboard from './pages/executive/Dashboard';
@@ -478,13 +480,29 @@ function App() {
                         </ProtectedRoute>
                       } 
                     />
-                    <Route 
-                      path="settings" 
+                    <Route
+                      path="settings"
                       element={
                         <ProtectedRoute requiredPermissions={['agency:read']}>
                           <AgencySettings />
                         </ProtectedRoute>
-                      } 
+                      }
+                    />
+                    <Route
+                      path="history"
+                      element={
+                        <ProtectedRoute requiredPermissions={['agency:read']}>
+                          <AgencyHistory />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="alerts"
+                      element={
+                        <ProtectedRoute requiredPermissions={['agency:read']}>
+                          <AgencyAlerts />
+                        </ProtectedRoute>
+                      }
                     />
                   </Route>
 

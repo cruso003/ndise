@@ -13,6 +13,8 @@ export interface User {
   clearanceLevel: ClearanceLevel;
   email: string;
   department: string;
+  organization?: string; // For agency partners (bank name, telecom name, etc.)
+  organizationType?: 'bank' | 'telecom' | 'insurance' | 'government'; // Partner type
   avatar?: string;
   isActive: boolean;
   createdAt: string;
@@ -76,16 +78,118 @@ export const mockUsers: User[] = [
     isActive: true,
     createdAt: '2024-02-15T00:00:00Z'
   },
+  // Bank Partners
   {
     id: '5',
-    username: 'agency.partner',
+    username: 'bank.ecobank',
     password: 'demo2024',
-    fullName: 'Grace Taylor',
+    fullName: 'Janet Williams',
     roles: ['agency'],
     permissions: getPermissionsForRole('agency'),
     clearanceLevel: 2,
-    email: 'g.taylor@ecobank.com',
-    department: 'Ecobank Liberia',
+    email: 'j.williams@ecobank.com',
+    department: 'KYC Department',
+    organization: 'Ecobank Liberia',
+    organizationType: 'bank',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100&h=100',
+    isActive: true,
+    createdAt: '2024-03-01T00:00:00Z'
+  },
+  {
+    id: '9',
+    username: 'bank.uba',
+    password: 'demo2024',
+    fullName: 'Michael Koffa',
+    roles: ['agency'],
+    permissions: getPermissionsForRole('agency'),
+    clearanceLevel: 2,
+    email: 'm.koffa@ubagroup.com',
+    department: 'Compliance & KYC',
+    organization: 'UBA Liberia',
+    organizationType: 'bank',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100&h=100',
+    isActive: true,
+    createdAt: '2024-03-05T00:00:00Z'
+  },
+  {
+    id: '10',
+    username: 'bank.gtbank',
+    password: 'demo2024',
+    fullName: 'Rebecca Tubman',
+    roles: ['agency'],
+    permissions: getPermissionsForRole('agency'),
+    clearanceLevel: 2,
+    email: 'r.tubman@gtbank.com',
+    department: 'Customer Onboarding',
+    organization: 'GTBank Liberia',
+    organizationType: 'bank',
+    avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=100&h=100',
+    isActive: true,
+    createdAt: '2024-03-08T00:00:00Z'
+  },
+  // Telecom Partners
+  {
+    id: '11',
+    username: 'telecom.lonestar',
+    password: 'demo2024',
+    fullName: 'Samuel Nyemah',
+    roles: ['agency'],
+    permissions: getPermissionsForRole('agency'),
+    clearanceLevel: 2,
+    email: 's.nyemah@lonestar.lr',
+    department: 'Customer Registration',
+    organization: 'Lonestar Cell MTN',
+    organizationType: 'telecom',
+    avatar: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&q=80&w=100&h=100',
+    isActive: true,
+    createdAt: '2024-03-10T00:00:00Z'
+  },
+  {
+    id: '12',
+    username: 'telecom.orange',
+    password: 'demo2024',
+    fullName: 'Grace Boakai',
+    roles: ['agency'],
+    permissions: getPermissionsForRole('agency'),
+    clearanceLevel: 2,
+    email: 'g.boakai@orange.lr',
+    department: 'SIM Registration',
+    organization: 'Orange Liberia',
+    organizationType: 'telecom',
+    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=100&h=100',
+    isActive: true,
+    createdAt: '2024-03-12T00:00:00Z'
+  },
+  // Insurance Partner
+  {
+    id: '13',
+    username: 'insurance.imperial',
+    password: 'demo2024',
+    fullName: 'Thomas Zubah',
+    roles: ['agency'],
+    permissions: getPermissionsForRole('agency'),
+    clearanceLevel: 2,
+    email: 't.zubah@imperialinsurance.lr',
+    department: 'Claims Processing',
+    organization: 'Imperial Insurance Company',
+    organizationType: 'insurance',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=100&h=100',
+    isActive: true,
+    createdAt: '2024-03-15T00:00:00Z'
+  },
+  // Legacy username for backward compatibility
+  {
+    id: '14',
+    username: 'agency.partner',
+    password: 'demo2024',
+    fullName: 'Janet Williams',
+    roles: ['agency'],
+    permissions: getPermissionsForRole('agency'),
+    clearanceLevel: 2,
+    email: 'j.williams@ecobank.com',
+    department: 'KYC Department',
+    organization: 'Ecobank Liberia',
+    organizationType: 'bank',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100&h=100',
     isActive: true,
     createdAt: '2024-03-01T00:00:00Z'
