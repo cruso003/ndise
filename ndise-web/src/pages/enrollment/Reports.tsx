@@ -1,10 +1,5 @@
-import PagePlaceholder from '../../components/PagePlaceholder';
+import UniversalReports from '../../components/UniversalReports';
 
 export default function EnrollmentReports() {
-  return (
-    <PagePlaceholder
-      title="Enrollment Reports"
-      description="Generate enrollment statistics and performance reports"
-    />
-  );
+  return <UniversalReports dashboardName="Enrollment" dashboardType="enrollment" />;
 }

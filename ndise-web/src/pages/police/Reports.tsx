@@ -1,4 +1,5 @@
-import PagePlaceholder from '../../components/PagePlaceholder';
+import UniversalReports from '../../components/UniversalReports';
+
 export default function PoliceReports() {
-  return <PagePlaceholder title="Police Reports" description="Crime statistics and clearance rates" />;
+  return <UniversalReports dashboardName="Police" dashboardType="police" />;
 }
