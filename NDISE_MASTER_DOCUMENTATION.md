@@ -428,16 +428,119 @@ When a bank verifies an identity via NDISE API:
 - Police can see financial footprint during investigations
 - Tax Authority can correlate bank accounts with tax filings
 
+**Two Types of Users**:
+
+The Agency Services Dashboard serves **two distinct user types**:
+
+1. **Operational Users** (Bank Tellers, Telecom Agents, KYC Officers):
+   - Need simple forms to verify identities during customer interactions
+   - Don't code or call APIs directly - use web interface
+   - Examples: Opening bank accounts, issuing SIM cards, processing insurance claims
+
+2. **Developer/Technical Users** (Backend Engineers, System Integrators):
+   - Integrate NDISE API into their organization's backend systems
+   - Manage API keys, monitor usage, configure webhooks
+   - Examples: Building automated verification into mobile banking apps
+
+**Operational User Features** (for frontline staff):
+
+**🔍 Quick Verification Tab**:
+- **Use Case**: Bank teller opening account for walk-in customer
+- **Workflow**: Type National ID → Click "Verify" → See instant results
+- **Features**:
+  - Real-time identity verification (<200ms)
+  - Photo display for visual confirmation
+  - Watchlist alerts (person on police wanted list)
+  - Fraud alerts (unusual account/SIM activity patterns)
+  - Risk level indicators (low/medium/high)
+  - Download verification report (PDF)
+- **Example**: Teller enters `1992030398765432` → System shows:
+  - ✅ VERIFIED: Marcus Gaye
+  - 🚨 HIGH RISK - On national watchlist
+  - 👮 Police Alert: Active investigation
+  - **Action**: Teller denies service, reports to manager
+
+**📊 Verification History Tab**:
+- **Use Case**: Compliance officer auditing KYC verifications
+- **Features**:
+  - Complete audit trail of all verifications performed
+  - Filter by status (success/failed), risk level, date
+  - Search by National ID, name, or verification ID
+  - Export to CSV for regulatory reporting
+  - See which staff member performed each verification
+- **Example**: Compliance officer searches for all "high-risk" verifications from last week → Identifies 3 flagged individuals → Reviews with security team
+
+**🔔 Alerts & Notifications Tab**:
+- **Use Case**: Security officer monitoring fraud patterns
+- **Alert Types**:
+  - **Watchlist Alerts**: Person added to national wanted list by Police
+  - **Fraud Alerts**: Unusual patterns detected (8 bank accounts in 3 months, 5 SIM cards registered)
+  - **System Alerts**: NDISE maintenance windows, API changes
+  - **Data Quality Alerts**: Biometric data outdated (>5 years)
+- **Example**: Alert shows "FRAUD: Grace Nyemah (ID: 1988121298765432) has 8 bank accounts opened in 3 months" → Security team investigates
+
+**📦 Batch Verification Tab**:
+- **Use Case**: HR department verifying 500 loan applicants
+- **Workflow**: Upload CSV with National IDs → System processes all → Download results
+- **Features**:
+  - CSV upload (up to 5,000 records per batch)
+  - Progress tracking (real-time processing status)
+  - Results download with success/failure breakdown
+  - Historical batch jobs tracking
+
+**Developer/Technical Features**:
+
+**🔑 API Keys Tab**:
+- Generate/revoke API keys
+- Set rate limits per key
+- Monitor usage by API key
+- Webhook configuration
+
+**📖 Documentation Tab**:
+- API reference (endpoints, parameters, responses)
+- Code examples (cURL, JavaScript, Python)
+- Authentication guide (API key usage)
+- Error codes and troubleshooting
+
+**Partner-Specific Workflows**:
+
+**Banks (KYC Verification)**:
+1. Customer walks in to open account
+2. Teller enters National ID in Quick Verification tab
+3. System shows: Photo, address, phone, watchlist status
+4. Shows "Bank Accounts: 2" (normal) or "Bank Accounts: 8" (fraud alert!)
+5. Teller proceeds or escalates based on risk level
+6. Verification logged in History tab for compliance audit
+
+**Telecoms (SIM Card Registration)**:
+1. Customer buys SIM card at retail shop
+2. Agent enters National ID in Quick Verification tab
+3. System shows: "SIM Cards Issued: 5" (fraud alert!)
+4. Agent refuses to issue additional SIM (prevents SIM box fraud)
+5. Alert logged for regulatory reporting to LTA
+
+**Insurance Companies (Claims Processing)**:
+1. Claims processor verifies beneficiary identity
+2. Enters National ID in Quick Verification tab
+3. System checks watchlist (fraud prevention)
+4. Shows "Accounts Opened: 12" across multiple insurers (duplicate claims)
+5. Fraud investigation triggered
+
 **Key Features**:
-- RESTful API for identity verification (queries unified NDISE database)
-- Rate limiting and quota management (10,000 requests/day for Ecobank)
-- Usage analytics and billing (per-call pricing)
-- API key management (secure access to national identity system)
-- Webhook notifications (real-time alerts for status changes)
-- Monthly usage reports (PDF statements for billing)
+- **Operational UI**: Quick Verification, History, Alerts, Batch Processing (for non-technical users)
+- **Developer API**: RESTful endpoints with <200ms response times
+- **Security Alerts**: Real-time watchlist and fraud pattern notifications
+- **Audit Trail**: Complete verification history for compliance
+- **Rate Limiting**: 10,000 requests/day for Ecobank (configurable per partner)
+- **Fraud Detection**: Unusual activity patterns (8+ accounts, 5+ SIM cards)
+- **Cross-Agency Intelligence**: Alerts from Police, NSA, Border integrated into verification results
 
 **Operational Capabilities**:
-- ✅ Identity Verification API (`POST /api/verify` - queries unified database)
+- ✅ Quick Verification (web form for operational users - bank tellers, agents)
+- ✅ Batch Processing (CSV upload for bulk verification - HR departments)
+- ✅ Verification History (audit trail for compliance officers)
+- ✅ Fraud & Watchlist Alerts (real-time security notifications)
+- ✅ Identity Verification API (`POST /api/verify` - for developers)
 - ✅ Usage Dashboard (45,892 requests/month from Ecobank alone)
 - ✅ Billing Reports (PDF statements for partner organizations)
 - ✅ API Key Management (secure credential lifecycle)
