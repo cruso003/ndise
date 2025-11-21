@@ -1,4 +1,5 @@
-import PagePlaceholder from '../../components/PagePlaceholder';
+import UniversalSettings from '../../components/UniversalSettings';
+
 export default function BorderSettings() {
-  return <PagePlaceholder title="Border Settings" description="Configure checkpoint settings and preferences" />;
+  return <UniversalSettings dashboardName="Border Control" dashboardType="border" />;
 }

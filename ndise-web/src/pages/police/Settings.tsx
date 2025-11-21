@@ -1,4 +1,5 @@
-import PagePlaceholder from '../../components/PagePlaceholder';
+import UniversalSettings from '../../components/UniversalSettings';
+
 export default function PoliceSettings() {
-  return <PagePlaceholder title="Police Settings" description="Officer preferences and system settings" />;
+  return <UniversalSettings dashboardName="Police" dashboardType="police" />;
 }
