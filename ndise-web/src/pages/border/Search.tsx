@@ -8,6 +8,7 @@ import {
 import { addToWatchlist } from '../../services/watchlistService';
 import { createBorderCrossingAlert, createAlert } from '../../services/alertService';
 import { useToast } from '../../context/ToastContext';
+import { generateBorderControlReport } from '../../utils/pdfGenerator';
 
 interface SearchResult {
   id: string;
@@ -285,14 +286,18 @@ export default function BorderSearch() {
   const handlePrintReport = () => {
     if (!selectedPerson) return;
 
-    showToast('Generating PDF report...', 'info');
+    try {
+      showToast('Generating PDF report...', 'info');
 
-    // Simulate PDF generation
-    setTimeout(() => {
-      showToast('Report generated successfully!', 'success');
-      // In production: trigger actual PDF download
-      console.log('PDF Report for:', selectedPerson.name);
-    }, 1500);
+      // Generate and download PDF report
+      setTimeout(() => {
+        generateBorderControlReport(selectedPerson);
+        showToast('Report generated successfully! Check your downloads.', 'success');
+      }, 500);
+    } catch (error) {
+      showToast('Failed to generate report. Please try again.', 'error');
+      console.error('PDF generation error:', error);
+    }
   };
 
   const getRiskColor = (level: string) => {

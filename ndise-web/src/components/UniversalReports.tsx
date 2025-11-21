@@ -5,6 +5,10 @@ import {
   BarChart3, PieChart, ArrowUpRight, ArrowDownRight, Eye
 } from 'lucide-react';
 import { NDISEPageHeader } from './NDISEBadge';
+import {
+  LineChart, Line, BarChart, Bar, AreaChart, Area,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+} from 'recharts';
 
 interface UniversalReportsProps {
   dashboardName: string;
@@ -149,6 +153,101 @@ export default function UniversalReports({ dashboardName, dashboardType }: Unive
       default: return 'Select Range';
     }
   };
+
+  // Generate chart data based on selected metric and dashboard type
+  const getChartData = () => {
+    const baseData = [
+      { name: 'Week 1', value: 0 },
+      { name: 'Week 2', value: 0 },
+      { name: 'Week 3', value: 0 },
+      { name: 'Week 4', value: 0 },
+    ];
+
+    // Generate different patterns based on dashboard type and metric
+    switch (dashboardType) {
+      case 'border':
+        if (selectedMetric === 'crossings') {
+          return [
+            { name: 'Week 1', value: 2890, approved: 2850, detained: 12, flagged: 28 },
+            { name: 'Week 2', value: 3120, approved: 3082, detained: 15, flagged: 23 },
+            { name: 'Week 3', value: 3450, approved: 3410, detained: 18, flagged: 22 },
+            { name: 'Week 4', value: 3387, approved: 3373, detained: 8, flagged: 6 },
+          ];
+        } else if (selectedMetric === 'watchlist') {
+          return [
+            { name: 'Week 1', critical: 8, high: 12, medium: 15, low: 20 },
+            { name: 'Week 2', critical: 5, high: 10, medium: 18, low: 22 },
+            { name: 'Week 3', critical: 6, high: 14, medium: 12, low: 18 },
+            { name: 'Week 4', critical: 4, high: 8, medium: 10, low: 15 },
+          ];
+        }
+        return [
+          { name: 'Week 1', value: 2890 },
+          { name: 'Week 2', value: 3120 },
+          { name: 'Week 3', value: 3450 },
+          { name: 'Week 4', value: 3387 },
+        ];
+
+      case 'police':
+        if (selectedMetric === 'cases') {
+          return [
+            { name: 'Week 1', opened: 45, closed: 38, active: 285 },
+            { name: 'Week 2', opened: 52, closed: 42, active: 295 },
+            { name: 'Week 3', opened: 48, closed: 45, active: 298 },
+            { name: 'Week 4', opened: 55, closed: 51, active: 302 },
+          ];
+        } else if (selectedMetric === 'arrests') {
+          return [
+            { name: 'Week 1', arrests: 22, warrants: 15, releases: 18 },
+            { name: 'Week 2', arrests: 28, warrants: 18, releases: 22 },
+            { name: 'Week 3', arrests: 25, warrants: 20, releases: 19 },
+            { name: 'Week 4', arrests: 31, warrants: 22, releases: 24 },
+          ];
+        }
+        return [
+          { name: 'Week 1', value: 285 },
+          { name: 'Week 2', value: 295 },
+          { name: 'Week 3', value: 298 },
+          { name: 'Week 4', value: 302 },
+        ];
+
+      case 'enrollment':
+        if (selectedMetric === 'registrations') {
+          return [
+            { name: 'Week 1', registrations: 385, biometric: 378, completed: 375 },
+            { name: 'Week 2', registrations: 425, biometric: 420, completed: 418 },
+            { name: 'Week 3', registrations: 510, biometric: 505, completed: 502 },
+            { name: 'Week 4', registrations: 503, biometric: 498, completed: 495 },
+          ];
+        } else if (selectedMetric === 'quality') {
+          return [
+            { name: 'Week 1', quality: 94.5 },
+            { name: 'Week 2', quality: 95.8 },
+            { name: 'Week 3', quality: 96.2 },
+            { name: 'Week 4', quality: 96.8 },
+          ];
+        }
+        return [
+          { name: 'Week 1', value: 385 },
+          { name: 'Week 2', value: 425 },
+          { name: 'Week 3', value: 510 },
+          { name: 'Week 4', value: 503 },
+        ];
+
+      case 'executive':
+        return [
+          { name: 'Week 1', users: 44595, alerts: 15, uptime: 99.95 },
+          { name: 'Week 2', users: 45123, alerts: 12, uptime: 99.97 },
+          { name: 'Week 3', users: 45521, alerts: 10, uptime: 99.98 },
+          { name: 'Week 4', users: 45829, alerts: 12, uptime: 99.97 },
+        ];
+
+      default:
+        return baseData;
+    }
+  };
+
+  const chartData = getChartData();
 
   return (
     <div className="space-y-6">
@@ -325,29 +424,128 @@ export default function UniversalReports({ dashboardName, dashboardType }: Unive
           </div>
         </div>
 
-        {/* Simulated Chart Area */}
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 border-2 border-dashed border-blue-200">
-          <div className="text-center">
-            <BarChart3 className="w-16 h-16 text-blue-400 mx-auto mb-4" />
-            <h4 className="text-lg font-bold text-blue-900 mb-2">Interactive Chart Visualization</h4>
-            <p className="text-sm text-blue-700 mb-4">
-              Real-time data visualization for {metricsConfig.categories.find(c => c.id === selectedMetric)?.label.toLowerCase()}
-            </p>
-            <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-              <div className="bg-white/50 rounded-lg p-4">
-                <div className="h-24 bg-blue-200 rounded mb-2"></div>
-                <p className="text-xs font-medium text-blue-800">Week 1</p>
-              </div>
-              <div className="bg-white/50 rounded-lg p-4">
-                <div className="h-32 bg-blue-300 rounded mb-2"></div>
-                <p className="text-xs font-medium text-blue-800">Week 2</p>
-              </div>
-              <div className="bg-white/50 rounded-lg p-4">
-                <div className="h-40 bg-blue-400 rounded mb-2"></div>
-                <p className="text-xs font-medium text-blue-800">Week 3</p>
-              </div>
-            </div>
-          </div>
+        {/* Real Chart Visualization */}
+        <div className="bg-white rounded-lg p-6 border border-slate-200">
+          <ResponsiveContainer width="100%" height={400}>
+            {selectedMetric === 'watchlist' && dashboardType === 'border' ? (
+              <BarChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="name" stroke="#64748b" />
+                <YAxis stroke="#64748b" />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px' }}
+                  labelStyle={{ fontWeight: 'bold', color: '#1e293b' }}
+                />
+                <Legend />
+                <Bar dataKey="critical" fill="#dc2626" name="Critical" />
+                <Bar dataKey="high" fill="#f59e0b" name="High" />
+                <Bar dataKey="medium" fill="#eab308" name="Medium" />
+                <Bar dataKey="low" fill="#22c55e" name="Low" />
+              </BarChart>
+            ) : selectedMetric === 'crossings' && dashboardType === 'border' ? (
+              <AreaChart data={chartData}>
+                <defs>
+                  <linearGradient id="colorApproved" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#22c55e" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#22c55e" stopOpacity={0.1}/>
+                  </linearGradient>
+                  <linearGradient id="colorDetained" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#dc2626" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#dc2626" stopOpacity={0.1}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="name" stroke="#64748b" />
+                <YAxis stroke="#64748b" />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px' }}
+                  labelStyle={{ fontWeight: 'bold', color: '#1e293b' }}
+                />
+                <Legend />
+                <Area type="monotone" dataKey="approved" stroke="#22c55e" fillOpacity={1} fill="url(#colorApproved)" name="Approved" />
+                <Area type="monotone" dataKey="detained" stroke="#dc2626" fillOpacity={1} fill="url(#colorDetained)" name="Detained" />
+                <Area type="monotone" dataKey="flagged" stroke="#f59e0b" fill="#f59e0b" fillOpacity={0.3} name="Flagged" />
+              </AreaChart>
+            ) : selectedMetric === 'cases' && dashboardType === 'police' ? (
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="name" stroke="#64748b" />
+                <YAxis stroke="#64748b" />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px' }}
+                  labelStyle={{ fontWeight: 'bold', color: '#1e293b' }}
+                />
+                <Legend />
+                <Line type="monotone" dataKey="opened" stroke="#3b82f6" strokeWidth={2} name="Opened" />
+                <Line type="monotone" dataKey="closed" stroke="#22c55e" strokeWidth={2} name="Closed" />
+                <Line type="monotone" dataKey="active" stroke="#f59e0b" strokeWidth={2} name="Active" />
+              </LineChart>
+            ) : selectedMetric === 'arrests' && dashboardType === 'police' ? (
+              <BarChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="name" stroke="#64748b" />
+                <YAxis stroke="#64748b" />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px' }}
+                  labelStyle={{ fontWeight: 'bold', color: '#1e293b' }}
+                />
+                <Legend />
+                <Bar dataKey="arrests" fill="#dc2626" name="Arrests" />
+                <Bar dataKey="warrants" fill="#f59e0b" name="Warrants" />
+                <Bar dataKey="releases" fill="#22c55e" name="Releases" />
+              </BarChart>
+            ) : selectedMetric === 'registrations' && dashboardType === 'enrollment' ? (
+              <AreaChart data={chartData}>
+                <defs>
+                  <linearGradient id="colorReg" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.1}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="name" stroke="#64748b" />
+                <YAxis stroke="#64748b" />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px' }}
+                  labelStyle={{ fontWeight: 'bold', color: '#1e293b' }}
+                />
+                <Legend />
+                <Area type="monotone" dataKey="registrations" stroke="#3b82f6" fillOpacity={1} fill="url(#colorReg)" name="Registrations" />
+                <Area type="monotone" dataKey="biometric" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.4} name="Biometric" />
+                <Area type="monotone" dataKey="completed" stroke="#22c55e" fill="#22c55e" fillOpacity={0.3} name="Completed" />
+              </AreaChart>
+            ) : selectedMetric === 'quality' && dashboardType === 'enrollment' ? (
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="name" stroke="#64748b" />
+                <YAxis domain={[90, 100]} stroke="#64748b" />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px' }}
+                  labelStyle={{ fontWeight: 'bold', color: '#1e293b' }}
+                />
+                <Legend />
+                <Line type="monotone" dataKey="quality" stroke="#22c55e" strokeWidth={3} name="Quality Score (%)" />
+              </LineChart>
+            ) : (
+              <AreaChart data={chartData}>
+                <defs>
+                  <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.1}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="name" stroke="#64748b" />
+                <YAxis stroke="#64748b" />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px' }}
+                  labelStyle={{ fontWeight: 'bold', color: '#1e293b' }}
+                />
+                <Legend />
+                <Area type="monotone" dataKey="value" stroke="#3b82f6" fillOpacity={1} fill="url(#colorValue)" name="Total" />
+              </AreaChart>
+            )}
+          </ResponsiveContainer>
         </div>
       </div>
 
