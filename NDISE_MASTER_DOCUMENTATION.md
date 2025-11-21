@@ -90,166 +90,365 @@
 
 ## Government Agencies (Arms)
 
-### 🛂 1. Border Control
+NDISE unifies **15+ government agencies** under a single national identity platform. The system is accessed through **6 specialized dashboards**, each designed for specific operational roles while sharing the same unified data infrastructure. This eliminates data silos, enables real-time cross-agency collaboration, and ensures every government entity works from the same source of truth.
+
+**The NDISE Vision**: *One Citizen, One Identity, Zero Silos*
+
+---
+
+### 🛂 1. Border Control Dashboard
 
 **Purpose**: Monitor and control all border crossings into/out of Liberia
 
+**How It Fits the NDISE Vision**:
+
+Border Control is the **first line of defense** in Liberia's security infrastructure and a prime example of NDISE's cross-agency power. When a traveler arrives at Roberts International Airport, the Border Control dashboard instantly queries the unified NDISE database to retrieve:
+
+- **Police Records**: Outstanding warrants, criminal history
+- **Immigration Status**: Visa validity, overstays, entry/exit history
+- **NSA Watchlist**: Security threats, intelligence alerts
+- **National ID Registry**: Biometric verification, citizenship status
+
+This demonstrates NDISE's core principle: **no agency operates in isolation**. When a Border Control officer clicks "Detain & Notify NSA," the action:
+
+1. Adds the person to the **unified national watchlist** (accessible to all agencies)
+2. Broadcasts a real-time alert to NSA and Police dashboards
+3. Logs the detention in the person's permanent NDISE profile
+4. Updates all border checkpoints nationwide instantly
+
+**Before NDISE**: Border officers made phone calls, sent emails, waited hours for responses.
+**With NDISE**: Real-time verification in <3 seconds, automatic cross-agency coordination.
+
 **Key Features**:
 - Real-time traveler verification with biometric matching
-- Watchlist screening at all checkpoints
+- Watchlist screening at all checkpoints (unified across agencies)
 - Visa status verification and expiry tracking
-- Travel history analysis
-- "Detain & Notify NSA" functionality
+- Travel history analysis (complete border crossing timeline)
+- "Detain & Notify NSA" functionality (demonstrates cross-agency alerts)
 - PDF report generation for border incidents
 
 **Operational Capabilities**:
-- ✅ Approve Entry (logs to NDISE with timestamp)
-- ✅ Detain Individual (adds to national watchlist + alerts NSA)
+- ✅ Approve Entry (logs to NDISE with timestamp, visible to all agencies)
+- ✅ Detain Individual (adds to national watchlist + alerts NSA/Police)
 - ✅ Print Border Control Report (generates professional PDF)
-- ✅ View Travel History (complete crossing timeline)
+- ✅ View Travel History (complete crossing timeline from unified database)
 
 **Demo Credentials**:
 ```
-Username: border.officer@ndise.gov.lr
-Password: BorderSecure2024
-Role: Border Control Officer
+Username: border.officer
+Password: demo2024
+Full Name: Officer Mary Toe
+Dashboard: /border
+Role: Border Control - Roberts Airport
 ```
 
 ---
 
-### 👮 2. Police
+### 👮 2. Police Dashboard
 
 **Purpose**: Law enforcement operations and criminal investigations
 
+**How It Fits the NDISE Vision**:
+
+The Police Dashboard showcases NDISE's **consolidated profile philosophy**. When a detective searches for a suspect, they don't just see police data—they see a **360-degree view** compiled from all 15+ government agencies:
+
+- **Criminal Records** (Police/Courts)
+- **Border Crossings** (Immigration)
+- **Vehicle Ownership** (LTA)
+- **Business Registrations** (Ministry of Commerce)
+- **Tax Compliance** (Revenue Authority)
+- **Property Ownership** (Land Registry)
+- **Phone Numbers** (Telecommunications)
+- **Health Records** (Ministry of Health, HIPAA-compliant)
+
+This exemplifies **zero data silos**. Instead of requesting information from multiple agencies (which could take days or weeks), a police officer gets instant access to the unified NDISE profile.
+
+**Cross-Agency Workflow Example**:
+
+When a Police officer clicks "Add to Wanted List":
+
+1. The person is added to the **unified national watchlist** (not just police database)
+2. Real-time alerts broadcast to **Border Control** (arrest at checkpoints), **NSA** (CCTV monitoring), and all police stations
+3. The warrant appears on the person's NDISE profile, visible to all authorized agencies
+4. Border officers are automatically notified if the person attempts to leave the country
+
+**Before NDISE**: Wanted persons could slip through border control because police warrants weren't shared in real-time.
+**With NDISE**: National warrant system with instant cross-agency synchronization.
+
 **Key Features**:
-- Consolidated criminal records from all agencies
+- Consolidated criminal records from all agencies (15+ data sources)
 - AI-powered risk scoring and threat assessment
 - Case management and investigation tracking
-- Wanted list management
+- Wanted list management (unified national watchlist)
 - Cross-agency warrant coordination
-- Real-time alert notifications
+- Real-time alert notifications (broadcasts to Border, NSA, all stations)
 
 **Operational Capabilities**:
-- ✅ Add to Wanted List (issues national arrest warrant)
-- ✅ Create Investigation Case (opens case file)
-- ✅ Print Police Report (generates investigation PDF)
-- ✅ View Consolidated Profile (15+ agency data sources)
+- ✅ Add to Wanted List (issues national arrest warrant, notifies all agencies)
+- ✅ Create Investigation Case (opens case file, links to NDISE profile)
+- ✅ Print Police Report (generates investigation PDF with consolidated data)
+- ✅ View Consolidated Profile (15+ agency data sources in one view)
 
 **Demo Credentials**:
 ```
-Username: police.officer@ndise.gov.lr
-Password: PoliceSecure2024
-Role: Police Officer
+Username: police.officer
+Password: demo2024
+Full Name: Detective Grace Kollie
+Dashboard: /police
+Role: Police - Criminal Investigation
 ```
 
 ---
 
-### 🕵️ 3. NSA (National Security Agency)
+### 🕵️ 3. NSA Dashboard (National Security Agency)
 
 **Purpose**: National security, intelligence, and surveillance operations
 
+**How It Fits the NDISE Vision**:
+
+The NSA Dashboard represents NDISE's **intelligence hub**—the central nervous system that monitors threats across all agencies and coordinates national security responses.
+
+**Real-time Intelligence Fusion**:
+
+The NSA dashboard receives real-time feeds from:
+
+- **Border Control**: Entry/exit alerts, detentions, visa overstays
+- **Police**: Warrant executions, arrests, investigation updates
+- **CCTV Network**: AI facial recognition detections across 12 cameras
+- **Enrollment**: Duplicate identity attempts, fraud alerts
+- **Immigration**: Travel pattern anomalies
+- **Telecommunications**: SIM card registrations linked to NDISE profiles
+
+This demonstrates NDISE's **unified intelligence architecture**. When NSA's AI detects a suspect on CCTV camera #7 (Roberts Airport), the system:
+
+1. Matches the face against the NDISE biometric database (45,829+ citizens)
+2. Retrieves the person's complete profile from all agencies
+3. Checks if they're on the national watchlist
+4. If flagged, sends instant alerts to Border Control and Police
+5. Tracks their movement across multiple cameras
+6. Updates their NDISE profile with location/time data
+
+**Cross-Agency Coordination Example**:
+
+NSA detects suspicious activity → Creates intelligence alert → Alert broadcasts to Police (investigation), Border (checkpoint monitoring), Executive (strategic oversight) → All agencies work from same intelligence report in real-time.
+
+**Before NDISE**: NSA intelligence was siloed, agencies learned about threats through phone calls or meetings.
+**With NDISE**: Real-time intelligence broadcasting to all relevant agencies simultaneously.
+
 **Key Features**:
-- CCTV surveillance with AI facial recognition
-- Real-time threat monitoring and alerts
-- Intelligence report management
-- Classified document handling
-- Network graph analysis of connections
-- Geospatial tracking and visualization
+- CCTV surveillance with AI facial recognition (matches against unified NDISE biometric database)
+- Real-time threat monitoring and alerts (broadcasts to all agencies)
+- Intelligence report management (shared across authorized agencies)
+- Classified document handling (Top Secret, Secret, Confidential)
+- Network graph analysis of connections (visualizes relationships across all agencies)
+- Geospatial tracking and visualization (maps threats nationwide)
 
 **Operational Capabilities**:
-- ✅ Live CCTV Monitoring (12 cameras across Monrovia)
-- ✅ AI Facial Recognition (automatic target detection)
-- ✅ Intelligence Reports (Top Secret, Secret, Confidential)
-- ✅ Network Graph Visualization (relationship mapping)
-- ✅ Geospatial Tracking (interactive map with markers)
+- ✅ Live CCTV Monitoring (12 cameras across Monrovia, AI face matching)
+- ✅ AI Facial Recognition (automatic target detection against NDISE database)
+- ✅ Intelligence Reports (Top Secret, Secret, Confidential - shared with authorized agencies)
+- ✅ Network Graph Visualization (relationship mapping across all data sources)
+- ✅ Geospatial Tracking (interactive map with threat markers)
 
 **Demo Credentials**:
 ```
-Username: nsa.analyst@ndise.gov.lr
-Password: NSASecure2024
-Role: NSA Intelligence Analyst
+Username: nsa.analyst
+Password: demo2024
+Full Name: Agent Sarah Mensah
+Dashboard: /nsa
+Role: NSA - Intelligence Division
 Clearance: Top Secret
 ```
 
 ---
 
-### 🏛️ 4. Executive
+### 🏛️ 4. Executive Dashboard
 
 **Purpose**: High-level oversight and system-wide analytics
 
+**How It Fits the NDISE Vision**:
+
+The Executive Dashboard provides **strategic oversight** of the entire NDISE ecosystem, demonstrating the system's maturity as a unified national platform.
+
+**System-Wide Visibility**:
+
+Executive users (Ministers, Department Heads, President's Office) see:
+
+- **Real-time Agency Health**: Status of all 15 integrated agencies (online/degraded/offline)
+- **Cross-Agency Metrics**: Border crossings, police cases, enrollments, API requests—all in one view
+- **Data Quality Scores**: Monitoring the 96.8% completeness across all agencies
+- **National Enrollment Progress**: Tracking the goal of registering 4.5M citizens
+- **System Performance**: 99.97% uptime, <100ms response times, zero data silos achieved
+
+This demonstrates NDISE's **transparency and accountability**. Government leadership can monitor the entire national identity system from a single dashboard, rather than requesting reports from 15 separate agencies.
+
+**Strategic Intelligence Integration**:
+
+The Executive Dashboard pulls insights from:
+
+- **NSA**: National security threats, intelligence summaries
+- **Police**: Crime trends, case resolution rates
+- **Border**: Travel patterns, immigration statistics
+- **Enrollment**: Registration velocity, demographic coverage
+- **Agency Services**: Private sector adoption (banks, telecoms using NDISE API)
+
+**Before NDISE**: Ministers received weekly paper reports from individual agencies, often with conflicting data.
+**With NDISE**: Real-time unified analytics from all agencies, single source of truth, instant drill-down capability.
+
 **Key Features**:
-- System-wide performance dashboard
-- Cross-agency metrics and KPIs
-- Executive reports with data visualization
-- Agency performance monitoring
-- National security overview
-- Trend analysis and insights
+- System-wide performance dashboard (all 15 agencies in one view)
+- Cross-agency metrics and KPIs (unified reporting)
+- Executive reports with data visualization (Recharts integration)
+- Agency performance monitoring (health status, uptime, response times)
+- National security overview (intelligence feed from NSA)
+- Trend analysis and insights (AI-powered pattern detection)
 
 **Operational Capabilities**:
-- ✅ System Overview (all 15 agencies)
-- ✅ Executive Reports (585+ lines of analytics)
-- ✅ Performance Metrics (uptime, users, alerts)
-- ✅ Trend Visualizations (Recharts integration)
+- ✅ System Overview (all 15 agencies, real-time status)
+- ✅ Executive Reports (comprehensive analytics from unified database)
+- ✅ Performance Metrics (uptime, users, alerts, data quality)
+- ✅ Trend Visualizations (Recharts integration showing cross-agency trends)
 
 **Demo Credentials**:
 ```
-Username: executive.admin@ndise.gov.lr
-Password: ExecutiveSecure2024
-Role: Executive Administrator
+Username: exec.admin
+Password: demo2024
+Full Name: Hon. James Karnley
+Dashboard: /executive
+Role: Executive - Ministry of Justice
 ```
 
 ---
 
-### 📝 5. Enrollment
+### 📝 5. Enrollment Dashboard
 
 **Purpose**: Citizen registration and biometric data collection
 
+**How It Fits the NDISE Vision**:
+
+The Enrollment Dashboard is the **foundation** of NDISE—the point where citizens enter the unified national identity system. Every person enrolled here becomes part of the single, authoritative database that all other agencies rely on.
+
+**Creating the Source of Truth**:
+
+When an Enrollment Officer registers a citizen:
+
+1. **Biometric Capture**: Fingerprints + facial scan → stored in unified NDISE biometric database
+2. **AI Duplicate Detection**: System checks all 45,829+ existing citizens to prevent duplicate identities (98.5% accuracy)
+3. **National ID Assignment**: Issues unique NDISE identifier (e.g., `1990010112345678`)
+4. **Real-time Propagation**: The new citizen profile becomes instantly available to all 15 agencies
+
+This demonstrates NDISE's **single enrollment, universal access** philosophy.
+
+**Cross-Agency Data Quality**:
+
+The Enrollment Dashboard monitors data completeness from:
+
+- **National ID Registry (NIR)**: Personal info, biometrics
+- **National Elections Commission (NEC)**: Voter registration status
+- **Tax Authority**: TIN numbers, compliance
+- **Immigration**: Travel documents, nationality verification
+
+The 96.8% data quality score displayed on the Enrollment Dashboard reflects the health of the **entire NDISE ecosystem**, not just enrollment data.
+
+**Before NDISE**: Citizens had to register separately with Immigration, Voter Registration, Tax Authority, Driver's License, etc.—creating duplicate records with inconsistent data.
+**With NDISE**: Register once, identity propagates to all agencies automatically.
+
 **Key Features**:
-- New citizen registration workflow
-- Biometric capture (fingerprint, facial recognition)
-- Document verification and validation
-- Data quality monitoring
-- Duplicate detection
-- Processing time tracking
+- New citizen registration workflow (feeds the unified NDISE database)
+- Biometric capture (fingerprint, facial recognition—shared across all agencies)
+- Document verification and validation (pulls data from Immigration, NIR, NEC)
+- Data quality monitoring (tracks completeness across all 15 agencies)
+- AI duplicate detection (prevents multiple identities in the unified system)
+- Processing time tracking (from 45 minutes to 12 minutes average)
 
 **Operational Capabilities**:
-- ✅ Register New Citizens (complete enrollment workflow)
-- ✅ Biometric Capture (fingerprint + face scan)
-- ✅ Data Quality Reports (96.8% quality score)
-- ✅ Processing Analytics (12-minute average)
+- ✅ Register New Citizens (complete enrollment workflow, creates unified NDISE profile)
+- ✅ Biometric Capture (fingerprint + face scan for national database)
+- ✅ Data Quality Reports (96.8% quality score across all agencies)
+- ✅ Processing Analytics (12-minute average, 247 enrollments today)
 
 **Demo Credentials**:
 ```
-Username: enrollment.officer@ndise.gov.lr
-Password: EnrollSecure2024
-Role: Enrollment Officer
+Username: enroll.officer
+Password: demo2024
+Full Name: Officer Thomas Kpan
+Dashboard: /enrollment
+Role: Enrollment - Civil Registry Paynesville
 ```
 
 ---
 
-### 🏢 6. Agency Services
+### 🏢 6. Agency Services Dashboard
 
 **Purpose**: API access for external organizations (banks, telecoms, etc.)
 
+**How It Fits the NDISE Vision**:
+
+The Agency Services Dashboard extends NDISE's unified identity system to the **private sector**, enabling banks, telecoms, insurance companies, and other businesses to verify citizen identities using the same authoritative database that government agencies use.
+
+**Democratizing Access to National Identity**:
+
+**Before NDISE**: A bank opening an account would:
+- Ask for multiple forms of ID (passport, driver's license, utility bill)
+- Manually verify documents (slow, error-prone)
+- Maintain their own customer database (creating another data silo)
+- No real-time verification against government records
+
+**With NDISE Agency Services API**:
+- Bank makes API call: `POST /api/verify {nationalId: "1990010112345678"}`
+- NDISE queries the unified database (same data Police, Border, NSA use)
+- Returns verification result in <200ms
+- Bank gets definitive answer: "This person is who they claim to be"
+
+**Economic Impact of Unified Identity**:
+
+By providing API access to the NDISE database, Liberia creates:
+
+- **Financial Inclusion**: Banks can onboard customers faster with verified KYC (Know Your Customer)
+- **Fraud Prevention**: Telecoms can prevent SIM card fraud by verifying national IDs in real-time
+- **Economic Growth**: Reduced friction in business transactions
+- **Tax Compliance**: Businesses can verify TIN numbers against NDISE records
+- **Trust in Digital Economy**: Single source of truth for identity verification
+
+**Revenue Model**:
+
+NDISE charges per-API-call fees to private sector partners:
+
+- Ecobank: 45,892 requests/month @ $0.05/request = $2,295/month
+- Lonestar Cell MTN: 78,234 requests/month = $3,912/month
+- Orange Liberia: 56,112 requests/month = $2,806/month
+
+**Total**: Government generates revenue while providing valuable service to private sector.
+
+**Cross-Agency Benefit**:
+
+When a bank verifies an identity via NDISE API:
+- The verification event is logged in the person's NDISE profile
+- NSA can track suspicious patterns (e.g., one ID used to open 50 bank accounts = fraud)
+- Police can see financial footprint during investigations
+- Tax Authority can correlate bank accounts with tax filings
+
 **Key Features**:
-- RESTful API for identity verification
-- Rate limiting and quota management
-- Usage analytics and billing
-- API key management
-- Webhook notifications
-- Monthly usage reports
+- RESTful API for identity verification (queries unified NDISE database)
+- Rate limiting and quota management (10,000 requests/day for Ecobank)
+- Usage analytics and billing (per-call pricing)
+- API key management (secure access to national identity system)
+- Webhook notifications (real-time alerts for status changes)
+- Monthly usage reports (PDF statements for billing)
 
 **Operational Capabilities**:
-- ✅ Identity Verification API (`/api/verify`)
-- ✅ Usage Dashboard (45,892 requests/month)
-- ✅ Billing Reports (PDF statements)
-- ✅ API Key Management
+- ✅ Identity Verification API (`POST /api/verify` - queries unified database)
+- ✅ Usage Dashboard (45,892 requests/month from Ecobank alone)
+- ✅ Billing Reports (PDF statements for partner organizations)
+- ✅ API Key Management (secure credential lifecycle)
 
 **Demo Credentials**:
 ```
-Organization: Ecobank Liberia
-API Key: ndise_live_ecobank_8829_a1b2c3d4
-Rate Limit: 10,000 requests/day
+Username: agency.partner
+Password: demo2024
+Full Name: Janet Williams
+Dashboard: /agency
+Organization: Ecobank Liberia - KYC Department
 ```
 
 ---
