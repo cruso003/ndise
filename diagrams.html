@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+        background: #fff;
+      }
+
+      .mermaid {
+        background: white;
+        padding: 20px;
+        margin-bottom: 50px;
+        border: 1px solid #eee;
+      }
+
+      h2 {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Diagram 1: System Architecture (5-Tier Model)</h2>
+    <div class="mermaid">
+      graph TD subgraph T1["Tier 1: Data Inputs"] B["Border Control"] -->|Entry
+      Logs| N["Normalization Layer"] T["Telecoms"] -->|SIM Metadata| N
+      F["Banks/FIU"] -->|KYC & Tx| N P["Police"] -->|Crime Records| N end
+      subgraph T2["Tier 2: Intelligence Core"] N -->|Anonymized Signals| AI["AI
+      Correlation Engine"] AI -->|Pattern Matching| R["Risk Scoring"] end
+      subgraph T3["Tier 3: The Legal Gate"] R -->|High Risk Flag| G{"Legal
+      Authorization"} G -->|Warrant Approved| D["Deanonymization"] G -->|Denied|
+      X["Drop Signal"] end subgraph T5["Tier 5: Operational Action"] D
+      -->|Identity Revealed| DB["Fusion Dashboard"] DB -->|Tasking| LE["Law
+      Enforcement Teams"] end style T3 fill:#f9f,stroke:#333,stroke-width:2px
+      style G fill:#bbf,stroke:#333,stroke-width:2px
+    </div>
+
+    <h2>Diagram 2: Collaboration Flow</h2>
+    <div class="mermaid">
+      sequenceDiagram participant T as Telecom (Orange/MTN) participant B as
+      Bank (Ecobank/GT) participant N as NSCIP Core participant J as
+      Judge/Oversight participant A as NSA Analyst T->>N: Signal: SIM Activated
+      (x10) B->>N: Signal: High Velocity Transfer Note over N: AI correlates
+      signals<br />Risk Score: 92/100 N->>A: Alert: Pattern Match #8821 A->>N:
+      Request Identity Reveal N->>J: Auto-Warrant Request J-->>N: Authorization
+      Token Granted N->>A: Show Target: John Doe, ID: LBR-123
+    </div>
+
+    <h2>Diagram 3: Emergency "Red Line" Protocol</h2>
+    <div class="mermaid">
+      stateDiagram-v2 [*] --> StandardMode StandardMode --> WarrantRequired :
+      Analyst Query StandardMode --> OverrideMode : Director Uses Red Key state
+      OverrideMode { [*] --> RedThemeActive RedThemeActive --> FullAccess : No
+      Warrant Needed FullAccess --> AuditLog : Immutable Record } OverrideMode
+      --> StandardMode : 48h Timer Exp / Manual Reset
+    </div>
+
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "default",
+        securityLevel: "loose",
+      });
+    </script>
+  </body>
+</html>
